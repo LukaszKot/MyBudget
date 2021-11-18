@@ -23,7 +23,9 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release ./src/MyBudget/MyBudget.App/MyBudget.App.csproj
+        run: dotnet build --configuration Release ./src/MyBudget/*.csproj
+      - name: Run tests
+        run: dotnet test ./src/MyBudget/*.csproj
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./src/MyBudget/MyBudget.App/MyBudget.App.csproj
 
