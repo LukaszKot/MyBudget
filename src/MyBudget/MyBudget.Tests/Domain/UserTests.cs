@@ -22,7 +22,7 @@ namespace MyBudget.Tests.Domain
         public void user_with_invalid_username_throws_exceptions(string username)
         {
             var ex = Assert.Throws<DomainException>(()=> new User(username, "hash"));
-            ex.ErrorType.Should().Be(DomainError.InvalidUsername);
+            ex?.ErrorType.Should().Be(DomainError.InvalidUsername);
         }
     }
 }
