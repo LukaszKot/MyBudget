@@ -2,6 +2,10 @@ namespace MyBudget.Core.Exceptions
 {
     public enum DomainError
     {
-        InvalidUsername
+        InvalidUsername,
+        UserWithGivenUsernameAlreadyExists,
+        PasswordCannotBePartOfUsername,
+        PasswordHaveToBeProvided,
+        PasswordPolicyVaildationFailed
     }
 }

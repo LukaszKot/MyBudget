@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyBudget.Infrastructure.Database;
 using MyBudget.Infrastructure.Repositories;
+using MyBudget.Infrastructure.Services;
 
 namespace MyBudget.App;
 
@@ -25,6 +26,9 @@ public class Startup
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration["SQLServerConnectionString"]));
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IHashingService, HashingService>();
+        services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
         services.AddControllersWithViews();
     }
 

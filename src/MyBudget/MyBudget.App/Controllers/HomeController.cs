@@ -1,28 +1,14 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MyBudget.App.Models;
-using MyBudget.Infrastructure.Database;
 
 namespace MyBudget.App.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _dbContext;
-
-        public HomeController(ILogger<HomeController> logger, AppDbContext dbContext)
-        {
-            _logger = logger;
-            _dbContext = dbContext;
-        }
-
         public IActionResult Index()
         {
-            if(_dbContext.Database.CanConnect())
-                return View();
-            throw new Exception("Doesn't work");
+            return View();
         }
 
         public IActionResult Privacy()

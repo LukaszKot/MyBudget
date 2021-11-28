@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MyBudget.Core.Domain;
 using MyBudget.Infrastructure.Database;
 
@@ -14,5 +15,10 @@ public class UserRepository : IUserRepository
     public async Task AddAsync(User user)
     {
         await _appDbContext.AddAsync(user);
+    }
+
+    public async Task<User?> Get(string username)
+    {
+        return await _appDbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
     }
 }
