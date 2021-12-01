@@ -16,7 +16,7 @@ public class UserController : Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDto)
+    public async Task<IActionResult> Register([FromForm] RegisterUserDto registerUserDto)
     {
         await _userService.RegisterAsync(registerUserDto);
         return View("RegisterResult");

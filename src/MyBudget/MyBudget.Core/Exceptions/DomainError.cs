@@ -6,6 +6,7 @@ namespace MyBudget.Core.Exceptions
         UserWithGivenUsernameAlreadyExists,
         PasswordCannotBePartOfUsername,
         PasswordHaveToBeProvided,
-        PasswordPolicyVaildationFailed
+        PasswordPolicyVaildationFailed,
+        PasswordsAreNotIdentitcal
     }
 }

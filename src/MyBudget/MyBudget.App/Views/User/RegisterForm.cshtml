@@ -1,8 +1,20 @@
-<form class="register">
-    <label for="username">Username: </label>
-    <input type="text" name="username" id="username" />
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password" />
-    <label for="repeat-password">Repeat password: </label>
-    <input type="password" name="repeat-password" id="repeat-password" />
+@model MyBudget.Infrastructure.Dto.User.RegisterUserDto
+
+<form class="register" asp-action="Register">
+    <input type="text" 
+           asp-for="Username" 
+           id="username" 
+           placeholder="Username" 
+           class="text-field"/>
+    <input type="password" 
+           asp-for="Password" 
+           id="password" 
+           placeholder="Password" 
+           class="text-field"/>
+    <input type="password" 
+           asp-for="RepeatPassword" 
+           id="repeat-password" 
+           placeholder="Repeat password" 
+           class="text-field"/>
+    <button type="submit" value="Register">Register</button>
 </form>

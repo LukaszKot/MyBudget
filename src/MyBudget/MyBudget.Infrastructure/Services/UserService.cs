@@ -28,7 +28,9 @@ public class UserService : IUserService
         {
             throw new DomainException(DomainError.UserWithGivenUsernameAlreadyExists);
         }
-        _passwordPolicyEnforcer.Validate(registerUserDto.Username, registerUserDto.Password);
+
+        _passwordPolicyEnforcer.Validate(registerUserDto.Username, registerUserDto.Password,
+            registerUserDto.RepeatPassword);
         var hash = _hashingService.Hash(registerUserDto.Password);
         user = new User(registerUserDto.Username, hash);
         await _userRepository.AddAsync(user);

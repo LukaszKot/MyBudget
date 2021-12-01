@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyBudget.App.HostedServices;
 using MyBudget.Infrastructure.Database;
 using MyBudget.Infrastructure.Repositories;
 using MyBudget.Infrastructure.Services;
@@ -30,6 +31,7 @@ public class Startup
         services.AddScoped<IHashingService, HashingService>();
         services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
         services.AddControllersWithViews();
+        services.AddHostedService<DatabaseMigrationHostedService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
