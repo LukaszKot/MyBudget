@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MyBudget.Infrastructure.Dto.User;
+using MyBudget.Infrastructure.Commands.User;
 using MyBudget.Infrastructure.Services;
 
 namespace MyBudget.App.Controllers;
@@ -16,15 +16,15 @@ public class UserController : Controller
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromForm] RegisterUserDto registerUserDto)
+    public async Task<IActionResult> Register([FromForm] RegisterUserCommand registerUserCommand)
     {
-        await _userService.RegisterAsync(registerUserDto);
+        await _userService.RegisterAsync(registerUserCommand);
         return View("RegisterResult");
     }
     
     [HttpGet("register")]
     public IActionResult RegisterForm()
     {
-        return View("RegisterForm");
+        return View("Register");
     }
 }

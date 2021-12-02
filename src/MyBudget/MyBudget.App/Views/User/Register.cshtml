@@ -1,11 +1,12 @@
-@model MyBudget.Infrastructure.Dto.User.RegisterUserDto
+@model MyBudget.Infrastructure.Commands.User.RegisterUserCommand
 
 <form class="register" asp-action="Register">
-    <input type="text" 
-           asp-for="Username" 
-           id="username" 
-           placeholder="Username" 
-           class="text-field"/>
+       <input type="text" 
+              asp-for="Username" 
+              id="username" 
+              placeholder="Username" 
+              class="text-field"/>
+       <span asp-validation-for="Username"></span>
     <input type="password" 
            asp-for="Password" 
            id="password" 

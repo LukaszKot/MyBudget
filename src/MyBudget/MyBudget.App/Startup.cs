@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyBudget.App.Filters;
 using MyBudget.App.HostedServices;
 using MyBudget.Infrastructure.Database;
 using MyBudget.Infrastructure.Repositories;
@@ -30,7 +31,11 @@ public class Startup
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IHashingService, HashingService>();
         services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
-        services.AddControllersWithViews();
+        services.AddControllersWithViews(x =>
+        {
+            x.MaxModelValidationErrors = 50;
+            x.Filters.Add<ValidateModelAttribute>();
+        });
         services.AddHostedService<DatabaseMigrationHostedService>();
     }
 

@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using MyBudget.Infrastructure.Dto.User;
+using MyBudget.Infrastructure.Commands.User;
 
 namespace MyBudget.Infrastructure.Services;
 
 public interface IUserService
 {
-    Task RegisterAsync(RegisterUserDto registerUserDto);
+    Task RegisterAsync(RegisterUserCommand registerUserCommand);
 }

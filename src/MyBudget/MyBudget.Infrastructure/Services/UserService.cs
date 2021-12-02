@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MyBudget.Core.Domain;
 using MyBudget.Core.Exceptions;
-using MyBudget.Infrastructure.Dto.User;
+using MyBudget.Infrastructure.Commands.User;
 using MyBudget.Infrastructure.Repositories;
 
 namespace MyBudget.Infrastructure.Services;
@@ -21,18 +21,18 @@ public class UserService : IUserService
         _passwordPolicyEnforcer = passwordPolicyEnforcer;
     }
 
-    public async Task RegisterAsync(RegisterUserDto registerUserDto)
+    public async Task RegisterAsync(RegisterUserCommand registerUserCommand)
     {
-        var user = await _userRepository.Get(registerUserDto.Username);
+        var user = await _userRepository.Get(registerUserCommand.Username);
         if (user is not null)
         {
             throw new DomainException(DomainError.UserWithGivenUsernameAlreadyExists);
         }
 
-        _passwordPolicyEnforcer.Validate(registerUserDto.Username, registerUserDto.Password,
-            registerUserDto.RepeatPassword);
-        var hash = _hashingService.Hash(registerUserDto.Password);
-        user = new User(registerUserDto.Username, hash);
+        _passwordPolicyEnforcer.Validate(registerUserCommand.Username, registerUserCommand.Password,
+            registerUserCommand.RepeatPassword);
+        var hash = _hashingService.Hash(registerUserCommand.Password);
+        user = new User(registerUserCommand.Username, hash);
         await _userRepository.AddAsync(user);
     }
 }
