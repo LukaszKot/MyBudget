@@ -10,7 +10,7 @@ namespace MyBudget.App.Domain
         public Guid BudgetTemplateId { get; set; }
         public BudgetType BudgetType { get; private set; }
         public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        public DateTime? To { get; set; }
         public IEnumerable<Operation> Operations { get; private set; }
 
         // for serialization
