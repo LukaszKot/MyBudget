@@ -25,6 +25,34 @@ namespace MyBudget.App.Database
                 .HasOne(x => x.OperationTemplate)
                 .WithMany(x => x.Operations)
                 .OnDelete(DeleteBehavior.NoAction);
+            
+            modelBuilder.Entity<BudgetTemplate>()
+                .Property(x => x.Name)
+                .HasMaxLength(50);
+            modelBuilder.Entity<Operation>(x =>
+            {
+                x.Property(y => y.Name)
+                    .HasMaxLength(50);
+                x.Property(y => y.Value)
+                    .HasPrecision(18, 2);
+            });
+            modelBuilder.Entity<OperationCategory>()
+                .Property(x => x.Name)
+                .HasMaxLength(50);
+            modelBuilder.Entity<OperationTemplate>(x =>
+            {
+                x.Property(y => y.Name)
+                    .HasMaxLength(50);
+                x.Property(y => y.DefaultValue)
+                    .HasPrecision(18, 2);
+            });
+            modelBuilder.Entity<User>(x =>
+                {
+                    x.Property(y => y.Username)
+                        .HasMaxLength(50);
+                    x.Property(y => y.Hash)
+                        .HasMaxLength(1024);
+                });
         }
     }
 }

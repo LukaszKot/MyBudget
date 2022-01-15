@@ -9,6 +9,7 @@ namespace MyBudget.App.Domain
         public Budget Budget { get; init; }
         public Guid? OperationTemplateId { get; init; }
         public OperationTemplate? OperationTemplate { get; init; }
+        public string? Name { get; set; }
         public decimal Value { get; set; }
         public ValueType ValueType { get; set; }
         public DateTime Date { get; set; }
