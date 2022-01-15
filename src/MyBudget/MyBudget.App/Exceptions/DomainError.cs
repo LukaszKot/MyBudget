@@ -9,6 +9,7 @@ namespace MyBudget.App.Exceptions
         PasswordPolicyVaildationFailed,
         PasswordsAreNotIdentitcal,
         InvalidObjectName,
-        InvalidOperationValue
+        InvalidOperationValue,
+        CannotRenameOperationIfInheritsFromTemplate
     }
 }

@@ -48,6 +48,10 @@ namespace MyBudget.App.Domain
         
         public void SetName(string name)
         {
+            if (OperationCategoryId != null)
+            {
+                throw new DomainException(DomainError.CannotRenameOperationIfInheritsFromTemplate);
+            }
             if (!RegexConsts.Username.IsMatch(name))
             {
                 throw new DomainException(DomainError.InvalidObjectName);

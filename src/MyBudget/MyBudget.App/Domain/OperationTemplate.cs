@@ -27,6 +27,7 @@ namespace MyBudget.App.Domain
         public OperationTemplate(Guid userId, string name, decimal defaultValue, ValueType valueType,
             Guid? budgetTemplateId = null, Guid? operationCategoryId = null)
         {
+            Id = Guid.NewGuid();
             UserId = userId;
             SetName(name);
             SetValue(defaultValue, valueType);
