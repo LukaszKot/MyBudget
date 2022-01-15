@@ -1,12 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using MyBudget.Core.Domain;
 
-namespace MyBudget.Infrastructure.Database;
-
-public class AppDbContext : DbContext
+namespace MyBudget.Infrastructure.Database
 {
-    public DbSet<User> Users { get; set; }
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public class AppDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
     }
 }
+

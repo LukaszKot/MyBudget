@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using MyBudget.Core.Domain;
 
-namespace MyBudget.Infrastructure.Repositories;
-
-public interface IUserRepository
+namespace MyBudget.Infrastructure.Repositories
 {
-    Task AddAsync(User user);
-    Task<User?> Get(string username);
+    public interface IUserRepository
+    {
+        Task AddAsync(User user);
+        Task<User?> Get(string username);
+    }
 }
+

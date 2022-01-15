@@ -3,23 +3,25 @@ using Microsoft.EntityFrameworkCore;
 using MyBudget.Core.Domain;
 using MyBudget.Infrastructure.Database;
 
-namespace MyBudget.Infrastructure.Repositories;
-
-public class UserRepository : IUserRepository
+namespace MyBudget.Infrastructure.Repositories
 {
-    private readonly AppDbContext _appDbContext;
-    public UserRepository(AppDbContext appDbContext)
+    public class UserRepository : IUserRepository
     {
-        _appDbContext = appDbContext;
-    }
-    public async Task AddAsync(User user)
-    {
-        _appDbContext.Add(user);
-        await _appDbContext.SaveChangesAsync();
-    }
+        private readonly AppDbContext _appDbContext;
+        public UserRepository(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+        public async Task AddAsync(User user)
+        {
+            _appDbContext.Add(user);
+            await _appDbContext.SaveChangesAsync();
+        }
 
-    public async Task<User?> Get(string username)
-    {
-        return await _appDbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
+        public async Task<User?> Get(string username)
+        {
+            return await _appDbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
+        }
     }
 }
+

@@ -1,15 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace MyBudget.Infrastructure.Database;
-
-public class AddDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+namespace MyBudget.Infrastructure.Database
 {
-    public AppDbContext CreateDbContext(string[] args)
+    public class AddDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-        optionsBuilder.UseSqlServer("Data Source=data.db");
+        public AppDbContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseSqlServer("Data Source=data.db");
 
-        return new AppDbContext(optionsBuilder.Options);
+            return new AppDbContext(optionsBuilder.Options);
+        }
     }
 }
+

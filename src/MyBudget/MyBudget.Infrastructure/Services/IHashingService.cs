@@ -1,6 +1,8 @@
-namespace MyBudget.Infrastructure.Services;
-
-public interface IHashingService
+namespace MyBudget.Infrastructure.Services
 {
-    string Hash(string password);
+    public interface IHashingService
+    {
+        string Hash(string password);
+    }
 }
+

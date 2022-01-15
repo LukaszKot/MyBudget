@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
 using MyBudget.Infrastructure.Commands.User;
 
-namespace MyBudget.Infrastructure.Services;
-
-public interface IUserService
+namespace MyBudget.Infrastructure.Services
 {
-    Task RegisterAsync(RegisterUserCommand registerUserCommand);
+    public interface IUserService
+    {
+        Task RegisterAsync(RegisterUserCommand registerUserCommand);
+    }
 }
+

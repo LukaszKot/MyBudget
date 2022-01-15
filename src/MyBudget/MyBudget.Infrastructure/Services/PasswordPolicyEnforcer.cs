@@ -1,32 +1,34 @@
 using System.Text.RegularExpressions;
 using MyBudget.Core.Exceptions;
 
-namespace MyBudget.Infrastructure.Services;
-
-public class PasswordPolicyEnforcer : IPasswordPolicyEnforcer
+namespace MyBudget.Infrastructure.Services
 {
-    private readonly Regex _passwordRegex 
-        = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-    public void Validate(string username, string password, string repeatedPassword)
+    public class PasswordPolicyEnforcer : IPasswordPolicyEnforcer
     {
-        if (string.IsNullOrEmpty(password))
+        private readonly Regex _passwordRegex 
+            = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+        public void Validate(string username, string password, string repeatedPassword)
         {
-            throw new DomainException(DomainError.PasswordHaveToBeProvided);
-        }
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new DomainException(DomainError.PasswordHaveToBeProvided);
+            }
 
-        if (!password.Equals(repeatedPassword))
-        {
-            throw new DomainException(DomainError.PasswordsAreNotIdentitcal);
-        }
+            if (!password.Equals(repeatedPassword))
+            {
+                throw new DomainException(DomainError.PasswordsAreNotIdentitcal);
+            }
         
-        if (username.Contains(password) || password.Contains(username))
-        {
-            throw new DomainException(DomainError.PasswordCannotBePartOfUsername);
-        }
+            if (username.Contains(password) || password.Contains(username))
+            {
+                throw new DomainException(DomainError.PasswordCannotBePartOfUsername);
+            }
 
-        if (!_passwordRegex.IsMatch(password))
-        {
-            throw new DomainException(DomainError.PasswordPolicyVaildationFailed);
+            if (!_passwordRegex.IsMatch(password))
+            {
+                throw new DomainException(DomainError.PasswordPolicyVaildationFailed);
+            }
         }
     }
 }
+
