@@ -3,16 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace MyBudget.App.Filters;
-
-public class ValidateModelAttribute : ActionFilterAttribute
+namespace MyBudget.App.Filters
 {
-    public override void OnActionExecuting(ActionExecutingContext context)
+    public class ValidateModelAttribute : ActionFilterAttribute
     {
-        if (context.ModelState.IsValid is false)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
-            context.Result = new ViewResult();
+            if (context.ModelState.IsValid is false)
+            {
+                context.Result = new ViewResult();
+            }
+            base.OnActionExecuting(context);
         }
-        base.OnActionExecuting(context);
     }
 }
+

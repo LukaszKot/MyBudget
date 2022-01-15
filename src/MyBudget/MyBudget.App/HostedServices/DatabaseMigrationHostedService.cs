@@ -5,21 +5,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyBudget.Infrastructure.Database;
 
-namespace MyBudget.App.HostedServices;
-
-public class DatabaseMigrationHostedService : BackgroundService
+namespace MyBudget.App.HostedServices
 {
-    private readonly IServiceScopeFactory _serviceScopeFactory;
-
-    public DatabaseMigrationHostedService(IServiceScopeFactory serviceScopeFactory)
+    public class DatabaseMigrationHostedService : BackgroundService
     {
-        _serviceScopeFactory = serviceScopeFactory;
-    }
+        private readonly IServiceScopeFactory _serviceScopeFactory;
     
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        using var scope = _serviceScopeFactory.CreateScope();
-        var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
-        await dbContext!.Database.MigrateAsync(cancellationToken: stoppingToken);
+        public DatabaseMigrationHostedService(IServiceScopeFactory serviceScopeFactory)
+        {
+            _serviceScopeFactory = serviceScopeFactory;
+        }
+        
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            using var scope = _serviceScopeFactory.CreateScope();
+            var dbContext = scope.ServiceProvider.GetService<AppDbContext>();
+            await dbContext!.Database.MigrateAsync(cancellationToken: stoppingToken);
+        }
     }
 }
+
