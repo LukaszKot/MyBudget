@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MyBudget.App.Exceptions;
 
 namespace MyBudget.App.Domain
 {
@@ -21,6 +22,36 @@ namespace MyBudget.App.Domain
         private OperationTemplate()
         {
             
+        }
+
+        public OperationTemplate(Guid userId, string name, decimal defaultValue, ValueType valueType,
+            Guid? budgetTemplateId = null, Guid? operationCategoryId = null)
+        {
+            UserId = userId;
+            SetName(name);
+            SetValue(defaultValue, valueType);
+            BudgetTemplateId = budgetTemplateId;
+            OperationCategoryId = operationCategoryId;
+        }
+
+        public void SetName(string name)
+        {
+            if (!RegexConsts.ObjectName.IsMatch(name))
+            {
+                throw new DomainException(DomainError.InvalidObjectName);
+            }
+            Name = name;
+        }
+        
+        public void SetValue(decimal defaultValue, ValueType valueType)
+        {
+            if (valueType == ValueType.Percent && Math.Abs(defaultValue) > 100)
+            {
+                throw new DomainException(DomainError.InvalidOperationValue);
+            }
+
+            DefaultValue = defaultValue;
+            ValueType = valueType;
         }
     }
 }

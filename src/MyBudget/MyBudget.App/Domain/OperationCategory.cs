@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MyBudget.App.Exceptions;
 
 namespace MyBudget.App.Domain
 {
@@ -13,6 +14,21 @@ namespace MyBudget.App.Domain
         private OperationCategory()
         {
             
+        }
+
+        public OperationCategory(string name)
+        {
+            Id = Guid.NewGuid();
+            SetName(name);
+        }
+
+        public void SetName(string name)
+        {
+            if (!RegexConsts.ObjectName.IsMatch(name))
+            {
+                throw new DomainException(DomainError.InvalidObjectName);
+            }
+            Name = name;
         }
     }
 }

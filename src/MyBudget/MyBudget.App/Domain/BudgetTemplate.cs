@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using MyBudget.App.Exceptions;
 
 namespace MyBudget.App.Domain
 {
@@ -17,6 +17,22 @@ namespace MyBudget.App.Domain
         private BudgetTemplate()
         {
             
+        }
+
+        public BudgetTemplate(Guid userId, string name)
+        {
+            Id = Guid.NewGuid();
+            UserId = userId;
+            SetName(name);
+        }
+
+        public void SetName(string name)
+        {
+            if (!RegexConsts.Username.IsMatch(name))
+            {
+                throw new DomainException(DomainError.InvalidObjectName);
+            }
+            Name = name;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace MyBudget.App.Domain
 
         private void SetUsername(string username)
         {
-            if (!Regex.IsMatch(username,@"^[A-Za-z][A-Za-z0-9_]{4,20}$"))
+            if (!RegexConsts.ObjectName.IsMatch(username))
             {
                 throw new DomainException(DomainError.InvalidUsername);
             }

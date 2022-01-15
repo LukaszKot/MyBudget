@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyBudget.App.Domain
 {
@@ -17,6 +18,23 @@ namespace MyBudget.App.Domain
         private Budget()
         {
             
+        }
+
+        public Budget(BudgetTemplate budgetTemplate)
+        {
+            var newId = Guid.NewGuid();
+            Id = newId;
+            BudgetTemplate = budgetTemplate;
+            BudgetTemplateId = budgetTemplate.Id;
+            BudgetType = BudgetType.Active;
+            From = DateTime.UtcNow;
+            Operations = budgetTemplate.OperationTemplates.Select(x => new Operation(newId, x));
+        }
+
+        public void Archive()
+        {
+            BudgetType = BudgetType.Historical;
+            To = DateTime.UtcNow;
         }
     }
 }

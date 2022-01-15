@@ -7,6 +7,8 @@ namespace MyBudget.App.Exceptions
         PasswordCannotBePartOfUsername,
         PasswordHaveToBeProvided,
         PasswordPolicyVaildationFailed,
-        PasswordsAreNotIdentitcal
+        PasswordsAreNotIdentitcal,
+        InvalidObjectName,
+        InvalidOperationValue
     }
 }
