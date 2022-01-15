@@ -10,8 +10,8 @@ namespace MyBudget.App.Domain
         public Guid Id { get; init; }
         public string Username  { get; private set; }
         public string Hash { get; set; }
-        public IEnumerable<BudgetTemplate> BudgetTemplates { get; set; }
-        public IEnumerable<OperationTemplate> OperationTemplates { get; set; }
+        public IEnumerable<BudgetTemplate> BudgetTemplates { get; }
+        public IEnumerable<OperationTemplate> OperationTemplates { get; }
         
         // for serialization
         private User()
