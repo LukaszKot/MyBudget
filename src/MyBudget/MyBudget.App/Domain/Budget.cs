@@ -7,7 +7,7 @@ namespace MyBudget.App.Domain
     {
         public Guid Id { get; init; }
         public BudgetTemplate BudgetTemplate { get; set; }
-        public int BudgetTemplateId { get; set; }
+        public Guid BudgetTemplateId { get; set; }
         public BudgetType BudgetType { get; private set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
