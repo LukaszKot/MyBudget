@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MyBudget.Infrastructure.Commands.User;
-using MyBudget.Infrastructure.Services;
+using MyBudget.App.Commands.User;
+using MyBudget.App.Services;
 
 namespace MyBudget.App.Controllers
 {

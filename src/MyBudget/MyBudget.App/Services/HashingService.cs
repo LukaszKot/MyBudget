@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace MyBudget.Infrastructure.Services
+namespace MyBudget.App.Services
 {
     public class HashingService : IHashingService
     {

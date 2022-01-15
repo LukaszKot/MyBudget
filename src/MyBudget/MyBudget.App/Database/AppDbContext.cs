@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MyBudget.Core.Domain;
+using MyBudget.App.Domain;
 
-namespace MyBudget.Infrastructure.Database
+namespace MyBudget.App.Database
 {
     public class AppDbContext : DbContext
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace MyBudget.Core.Exceptions
+namespace MyBudget.App.Exceptions
 {
     public class DomainException : Exception
     {

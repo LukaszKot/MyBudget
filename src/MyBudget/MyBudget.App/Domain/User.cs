@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using MyBudget.Core.Exceptions;
+using MyBudget.App.Exceptions;
 
-namespace MyBudget.Core.Domain
+namespace MyBudget.App.Domain
 {
     public class User
     {

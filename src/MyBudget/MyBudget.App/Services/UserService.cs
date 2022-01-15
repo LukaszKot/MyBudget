@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using MyBudget.Core.Domain;
-using MyBudget.Core.Exceptions;
-using MyBudget.Infrastructure.Commands.User;
-using MyBudget.Infrastructure.Repositories;
+using MyBudget.App.Commands.User;
+using MyBudget.App.Domain;
+using MyBudget.App.Exceptions;
+using MyBudget.App.Repositories;
 
-namespace MyBudget.Infrastructure.Services
+namespace MyBudget.App.Services
 {
     public class UserService : IUserService
     {

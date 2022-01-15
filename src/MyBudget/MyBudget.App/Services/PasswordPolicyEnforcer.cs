@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using MyBudget.Core.Exceptions;
+using MyBudget.App.Exceptions;
 
-namespace MyBudget.Infrastructure.Services
+namespace MyBudget.App.Services
 {
     public class PasswordPolicyEnforcer : IPasswordPolicyEnforcer
     {

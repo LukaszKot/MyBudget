@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyBudget.Infrastructure.Database;
+using MyBudget.App.Database;
 
 namespace MyBudget.App.HostedServices
 {

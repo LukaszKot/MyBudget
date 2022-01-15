@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MyBudget.Core.Domain;
-using MyBudget.Infrastructure.Database;
+using MyBudget.App.Database;
+using MyBudget.App.Domain;
 
-namespace MyBudget.Infrastructure.Repositories
+namespace MyBudget.App.Repositories
 {
     public class UserRepository : IUserRepository
     {

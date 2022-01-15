@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using MyBudget.Core.Domain;
+using MyBudget.App.Domain;
 
-namespace MyBudget.Infrastructure.Repositories
+namespace MyBudget.App.Repositories
 {
     public interface IUserRepository
     {

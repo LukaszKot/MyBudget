@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using MyBudget.Infrastructure.Commands.User;
+using MyBudget.App.Commands.User;
 
-namespace MyBudget.Infrastructure.Services
+namespace MyBudget.App.Services
 {
     public interface IUserService
     {

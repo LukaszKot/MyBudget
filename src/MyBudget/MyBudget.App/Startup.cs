@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyBudget.App.Database;
 using MyBudget.App.Filters;
 using MyBudget.App.HostedServices;
-using MyBudget.Infrastructure.Database;
-using MyBudget.Infrastructure.Repositories;
-using MyBudget.Infrastructure.Services;
+using MyBudget.App.Repositories;
+using MyBudget.App.Services;
 
 namespace MyBudget.App
 {

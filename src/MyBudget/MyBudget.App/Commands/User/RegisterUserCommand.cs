@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MyBudget.Infrastructure.Commands.User
+namespace MyBudget.App.Commands.User
 {
     public record RegisterUserCommand(
         [Required] string Username, 

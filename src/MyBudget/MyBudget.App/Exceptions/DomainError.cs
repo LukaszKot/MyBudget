@@ -1,4 +1,4 @@
-namespace MyBudget.Core.Exceptions
+namespace MyBudget.App.Exceptions
 {
     public enum DomainError
     {

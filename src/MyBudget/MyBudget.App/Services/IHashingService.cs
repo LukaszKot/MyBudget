@@ -1,4 +1,4 @@
-namespace MyBudget.Infrastructure.Services
+namespace MyBudget.App.Services
 {
     public interface IHashingService
     {
