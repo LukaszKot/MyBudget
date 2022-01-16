@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using ValueType = MyBudget.App.Domain.ValueType;
 
-namespace MyBudget.App.Commands.Operation
+namespace MyBudget.App.Commands.OperationTemplate
 {
-    public record UpdateOperation(
-        [Required] Guid Id, 
+    public record CreateOperationTemplateCommand(
+        [Required] Guid UserId, 
         [Required] string Name, 
         [Required] decimal DefaultValue, 
         [Required] ValueType ValueType,
-        DateTime? Date,
+        Guid? BudgetTemplateId, 
         Guid? OperationCategoryId);
 }

@@ -4,11 +4,10 @@ using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Commands.OperationTemplate
 {
-    public record CreateOperationTemplate(
-        [Required] Guid UserId, 
+    public record UpdateOperationTemplateCommand(
+        [Required] Guid Id, 
         [Required] string Name, 
         [Required] decimal DefaultValue, 
-        [Required] ValueType ValueType,
-        Guid? BudgetTemplateId, 
+        [Required] ValueType ValueType, 
         Guid? OperationCategoryId);
 }

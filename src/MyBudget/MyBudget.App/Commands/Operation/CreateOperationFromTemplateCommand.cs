@@ -4,7 +4,7 @@ using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Commands.Operation
 {
-    public record CreateOperationFromTemplate(
+    public record CreateOperationFromTemplateCommand(
         [Required] Guid BudgetId,
         [Required] Guid OperationTemplateId);
 }

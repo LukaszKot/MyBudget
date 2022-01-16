@@ -6,6 +6,7 @@ namespace MyBudget.App.Services
     public interface IUserService
     {
         Task RegisterAsync(RegisterUserCommand registerUserCommand);
+        Task LoginAsync(LoginUserCommand command);
     }
 }
 

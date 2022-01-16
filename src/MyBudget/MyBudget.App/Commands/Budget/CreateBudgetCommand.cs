@@ -3,5 +3,5 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBudget.App.Commands.Budget
 {
-    public record ArchiveBudget([Required] Guid Id);
+    public record CreateBudgetCommand([Required] Guid BudgetTemplateId);
 }

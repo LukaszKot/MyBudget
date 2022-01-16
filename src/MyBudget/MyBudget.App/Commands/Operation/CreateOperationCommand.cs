@@ -4,7 +4,7 @@ using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Commands.Operation
 {
-    public record CreateOperation(
+    public record CreateOperationCommand(
         [Required] Guid BudgetId, 
         [Required] string Name, 
         [Required] decimal DefaultValue, 

@@ -35,6 +35,11 @@ namespace MyBudget.App.Services
             user = new User(registerUserCommand.Username, hash);
             await _userRepository.AddAsync(user);
         }
+
+        public Task LoginAsync(LoginUserCommand command)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

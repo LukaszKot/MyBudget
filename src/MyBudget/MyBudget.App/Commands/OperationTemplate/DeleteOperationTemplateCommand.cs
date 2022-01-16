@@ -4,6 +4,6 @@ using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Commands.OperationTemplate
 {
-    public record DeleteOperationTemplate(
+    public record DeleteOperationTemplateCommand(
         [Required] Guid Id);
 }

@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyBudget.App.Commands.BudgetTemplate
+namespace MyBudget.App.Commands.Operation
 {
-    public record DeleteBudgetTemplate(
+    public record DeleteOperationCommand(
         [Required] Guid Id);
 }

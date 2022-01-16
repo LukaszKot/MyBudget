@@ -11,5 +11,5 @@ namespace MyBudget.App.Queries.Budget
         DateTime To,
         decimal Total,
         IEnumerable<OperationDto> Operations,
-        StatisticsDto Statistics);
+        StatisticsDto Statistics) : GetBudgetOperationsQueryResponse(Id, Name, From, Total, Operations);
 }
