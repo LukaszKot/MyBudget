@@ -28,6 +28,10 @@ namespace MyBudget.App
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration["SQLServerConnectionString"]));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBudgetRepository, BudgetRepository>();
+            services.AddScoped<IBudgetTemplateRepository, BudgetTemplateRepository>();
+            services.AddScoped<IOperationRepository, OperationRepository>();
+            services.AddScoped<IOperationTemplateRepository, OperationTemplateRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashingService, HashingService>();
             services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
