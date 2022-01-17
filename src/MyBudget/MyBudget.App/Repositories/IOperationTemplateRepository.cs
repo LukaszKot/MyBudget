@@ -9,5 +9,8 @@ namespace MyBudget.App.Repositories
     {
         Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId);
         Task<OperationTemplate> GetAsync(Guid id);
+        Task Create(OperationTemplate operationTemplate);
+        Task Update(OperationTemplate operationTemplate);
+        Task Delete(OperationTemplate operationTemplate);
     }
 }

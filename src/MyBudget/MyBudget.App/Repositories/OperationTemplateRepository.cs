@@ -28,5 +28,23 @@ namespace MyBudget.App.Repositories
         {
             return await _dbContext.OperationTemplates.SingleOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task Create(OperationTemplate operationTemplate)
+        {
+            await _dbContext.OperationTemplates.AddAsync(operationTemplate);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Update(OperationTemplate operationTemplate)
+        {
+            _dbContext.Update(operationTemplate);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(OperationTemplate operationTemplate)
+        {
+            _dbContext.OperationTemplates.Remove(operationTemplate);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
