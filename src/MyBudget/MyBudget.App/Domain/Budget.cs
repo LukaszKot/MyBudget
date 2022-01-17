@@ -36,5 +36,16 @@ namespace MyBudget.App.Domain
             BudgetType = BudgetType.Historical;
             To = DateTime.UtcNow;
         }
+
+        public decimal Total()
+        {
+            var income = Operations
+                .Where(x => x.Value > 0)
+                .Sum(x => x.Value);
+            var expenses = Operations
+                .Where(x => x.Value < 0)
+                .Sum(x => x.ValueType == ValueType.FixedAmount ? x.Value : x.Value * income);
+            return income - expenses;
+        }
     }
 }

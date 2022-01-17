@@ -32,6 +32,8 @@ namespace MyBudget.App
             services.AddScoped<IBudgetTemplateRepository, BudgetTemplateRepository>();
             services.AddScoped<IOperationRepository, OperationRepository>();
             services.AddScoped<IOperationTemplateRepository, OperationTemplateRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IBudgetService, BudgetService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashingService, HashingService>();
             services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();

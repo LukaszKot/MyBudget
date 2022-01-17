@@ -5,8 +5,8 @@ using MyBudget.App.Domain;
 
 namespace MyBudget.App.Repositories
 {
-    public interface IOperationTemplateRepository
+    public interface ICategoryRepository
     {
-        Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId);
+        Task<IEnumerable<OperationCategory>> GetAll();
     }
 }

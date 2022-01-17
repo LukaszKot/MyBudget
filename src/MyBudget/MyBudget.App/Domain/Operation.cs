@@ -10,7 +10,7 @@ namespace MyBudget.App.Domain
         public Budget Budget { get; }
         public Guid? OperationTemplateId { get; init; }
         public OperationTemplate? OperationTemplate { get; }
-        public string? Name { get; private set; }
+        public string Name { get; private set; }
         public decimal Value { get; private set; }
         public ValueType ValueType { get; private set; }
         public DateTime Date { get; set; }
@@ -62,6 +62,11 @@ namespace MyBudget.App.Domain
         public void SetValue(decimal value, ValueType valueType)
         {
             if (valueType == ValueType.Percent && Math.Abs(value) > 100)
+            {
+                throw new DomainException(DomainError.InvalidOperationValue);
+            }
+
+            if (value > 0 && valueType == ValueType.Percent)
             {
                 throw new DomainException(DomainError.InvalidOperationValue);
             }

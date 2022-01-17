@@ -50,6 +50,11 @@ namespace MyBudget.App.Domain
             {
                 throw new DomainException(DomainError.InvalidOperationValue);
             }
+            
+            if (defaultValue > 0 && valueType == ValueType.Percent)
+            {
+                throw new DomainException(DomainError.InvalidOperationValue);
+            }
 
             DefaultValue = defaultValue;
             ValueType = valueType;
