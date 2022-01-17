@@ -51,7 +51,7 @@ namespace MyBudget.App
             services.AddHttpContextAccessor();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(x => x.LoginPath = "/account/login");
+                .AddCookie(x => x.LoginPath = "/user/login");
 
         }
     

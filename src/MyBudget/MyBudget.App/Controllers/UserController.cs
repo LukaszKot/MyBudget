@@ -27,6 +27,26 @@ namespace MyBudget.App.Controllers
         {
             return View("Register");
         }
+
+        [HttpGet("login")]
+        public IActionResult LoginForm()
+        {
+            return View("Login");
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromForm] LoginUserCommand loginUserCommand)
+        {
+            await _userService.LoginAsync(loginUserCommand);
+            return Redirect("/");
+        }
+        
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _userService.LogoutAsync();
+            return Redirect("/user/login");
+        }
     }
 }
 
