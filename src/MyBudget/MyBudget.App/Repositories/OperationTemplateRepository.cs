@@ -23,5 +23,10 @@ namespace MyBudget.App.Repositories
                 .Include(x => x.OperationCategory)
                 .ToListAsync();
         }
+
+        public async Task<OperationTemplate> GetAsync(Guid id)
+        {
+            return await _dbContext.OperationTemplates.SingleOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

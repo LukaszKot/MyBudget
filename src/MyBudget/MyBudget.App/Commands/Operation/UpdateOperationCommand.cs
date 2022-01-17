@@ -9,6 +9,6 @@ namespace MyBudget.App.Commands.Operation
         [Required] string Name, 
         [Required] decimal DefaultValue, 
         [Required] ValueType ValueType,
-        DateTime? Date,
+        [Required] DateTime Date,
         Guid? OperationCategoryId);
 }

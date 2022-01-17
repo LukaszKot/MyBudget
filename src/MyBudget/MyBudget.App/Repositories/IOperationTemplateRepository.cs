@@ -8,5 +8,6 @@ namespace MyBudget.App.Repositories
     public interface IOperationTemplateRepository
     {
         Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId);
+        Task<OperationTemplate> GetAsync(Guid id);
     }
 }
