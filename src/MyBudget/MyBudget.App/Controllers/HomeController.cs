@@ -1,27 +1,25 @@
-﻿using System.Diagnostics;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyBudget.App.Models;
+using MyBudget.App.Services;
 
 namespace MyBudget.App.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        [Authorize]
-        public IActionResult Index()
+        private readonly IBudgetService _budgetService;
+
+        public HomeController(IBudgetService budgetService)
         {
-            return View();
+            _budgetService = budgetService;
         }
 
-        public IActionResult Privacy()
+        
+        public async Task<IActionResult> Index()
         {
+            await _budgetService.GetBudgetsAsync(UserId);
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }
