@@ -18,8 +18,8 @@ namespace MyBudget.App.Controllers
         
         public async Task<IActionResult> Index()
         {
-            await _budgetService.GetBudgetsAsync(UserId);
-            return View();
+            var model = await _budgetService.GetBudgetsAsync(UserId);
+            return View(model);
         }
     }
 }

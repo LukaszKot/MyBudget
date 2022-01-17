@@ -4,7 +4,7 @@ using MyBudget.App.DTO.Budget;
 namespace MyBudget.App.Queries.Budget
 {
     public record GetBudgetsQueryResponse(
-        IEnumerable<BudgetTemplateDto> BudgetTemplate,
+        IEnumerable<BudgetTemplateDto> BudgetTemplates,
         IEnumerable<BudgetDto> ActiveBudgets, 
         IEnumerable<BudgetDto> ArchivedBudgets,
         IEnumerable<OperationTemplateDto> OperationTemplates,

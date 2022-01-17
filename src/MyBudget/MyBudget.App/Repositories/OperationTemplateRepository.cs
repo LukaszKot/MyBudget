@@ -20,7 +20,6 @@ namespace MyBudget.App.Repositories
         {
             return await _dbContext.OperationTemplates
                 .Where(x => x.UserId == userId)
-                .Include(x => x.OperationCategory)
                 .ToListAsync();
         }
 

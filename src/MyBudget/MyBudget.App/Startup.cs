@@ -27,7 +27,7 @@ namespace MyBudget.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration["SQLServerConnectionString"]));
+                options.UseSqlServer(Configuration["SQLServerConnectionString"]), ServiceLifetime.Transient);
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<IBudgetTemplateRepository, BudgetTemplateRepository>();

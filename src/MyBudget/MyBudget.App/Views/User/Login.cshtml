@@ -1,8 +1,14 @@
-@model dynamic
+@model MyBudget.App.Commands.User.LoginUserCommand
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Logowanie";
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h2>Logowanie</h2>
+<form asp-controller="User" asp-action="Login">
+    <input type="text" placeholder="Login" asp-for="Username" />
+    <input type="password" placeholder="Hasło" asp-for="Password" />
+    <input type="submit" value="Zaloguj się!"/>
+</form>
+@Html.ActionLink("Nie masz konta? Zarestruj się!", "RegisterForm", "User")

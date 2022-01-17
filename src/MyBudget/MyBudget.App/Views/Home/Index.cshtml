@@ -1,8 +1,43 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
 }
+@model MyBudget.App.Queries.Budget.GetBudgetsQueryResponse
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <h1>Witaj @User.Identity!.Name!</h1>
+    <div>
+        <h2>Szablony budżetów</h2>
+        @foreach (var budgetTemplate in Model.BudgetTemplates)
+        {
+            <div>@budgetTemplate.Name</div>
+        }
+    </div>
+    <div>
+        <h2>Aktywne budżety</h2>
+        @foreach (var activeBudget in Model.ActiveBudgets)
+        {
+            <div>@activeBudget.Name, @activeBudget.From, @activeBudget.To</div>
+        }
+    </div>
+    <div>
+        <h2>Historyczne budżety</h2>
+        @foreach (var archivedBudget in Model.ArchivedBudgets)
+        {
+            <div>@archivedBudget.Name, @archivedBudget.From, @archivedBudget.To</div>
+        }
+    </div>
+    <div>
+        <h2>Schematy operacji</h2>
+        @foreach (var operationTemplate in Model.OperationTemplates)
+        {
+            <div>@operationTemplate.Name, @operationTemplate.CategoryName, @operationTemplate.DefaultValue, @operationTemplate.ValueType, @operationTemplate.BudgetTemplateId</div>
+        }
+    </div>
+    <div>
+        <h2>Kategorie operacji</h2>
+        @foreach (var categories in Model.Categories)
+        {
+            <div>@categories.Name</div>
+        }
+    </div>
 </div>
