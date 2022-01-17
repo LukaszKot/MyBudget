@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.User;
 
 namespace MyBudget.App.Services
@@ -7,6 +8,7 @@ namespace MyBudget.App.Services
     {
         Task RegisterAsync(RegisterUserCommand registerUserCommand);
         Task LoginAsync(LoginUserCommand command);
+        Task LogoutAsync();
     }
 }
 

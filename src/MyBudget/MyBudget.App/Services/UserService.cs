@@ -1,4 +1,10 @@
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.User;
 using MyBudget.App.Domain;
 using MyBudget.App.Exceptions;
@@ -11,14 +17,17 @@ namespace MyBudget.App.Services
         private readonly IUserRepository _userRepository;
         private readonly IHashingService _hashingService;
         private readonly IPasswordPolicyEnforcer _passwordPolicyEnforcer;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IUserRepository userRepository, 
             IHashingService hashingService,
-            IPasswordPolicyEnforcer passwordPolicyEnforcer)
+            IPasswordPolicyEnforcer passwordPolicyEnforcer, 
+            IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _hashingService = hashingService;
             _passwordPolicyEnforcer = passwordPolicyEnforcer;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task RegisterAsync(RegisterUserCommand registerUserCommand)
@@ -36,9 +45,41 @@ namespace MyBudget.App.Services
             await _userRepository.AddAsync(user);
         }
 
-        public Task LoginAsync(LoginUserCommand command)
+        public async Task LoginAsync(LoginUserCommand command)
         {
-            throw new System.NotImplementedException();
+            var user = await _userRepository.Get(command.Username);
+            if (user is null)
+            {
+                throw new DomainException(DomainError.InvalidCredentials);
+            }
+
+            if (!_hashingService.CheckPassword(user.Hash, command.Password))
+            {
+                throw new DomainException(DomainError.InvalidCredentials);
+            }
+            await Login(user);
+        }
+        
+        public async Task LogoutAsync()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            await httpContext!.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        private async Task Login(User user)
+        {
+            var claims = new List<Claim>()
+            {
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.Username)
+            };
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(claimsIdentity);
+
+            var httpContext = _httpContextAccessor.HttpContext;
+            await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                principal,
+                new AuthenticationProperties {IsPersistent = false});
         }
     }
 }
