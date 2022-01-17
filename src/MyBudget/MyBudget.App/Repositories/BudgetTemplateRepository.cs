@@ -17,8 +17,33 @@ namespace MyBudget.App.Repositories
 
         public async Task<BudgetTemplate> GetBudgetTemplateWithOperationTemplates(Guid budgetId)
         {
-            return await _dbContext.BudgetTemplates.Include(x => x.OperationTemplates)
+            return await _dbContext.BudgetTemplates
+                .Include(x => x.OperationTemplates)
+                .ThenInclude(x => x.OperationCategory)
                 .SingleOrDefaultAsync(x => x.Id == budgetId);
+        }
+
+        public async Task Create(BudgetTemplate budgetTemplate)
+        {
+            await _dbContext.AddAsync(budgetTemplate);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Update(BudgetTemplate budgetTemplate)
+        {
+            _dbContext.Update(budgetTemplate);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<BudgetTemplate> Get(Guid id)
+        {
+            return await _dbContext.BudgetTemplates.SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task Delete(BudgetTemplate budgetTemplate)
+        {
+            _dbContext.BudgetTemplates.Remove(budgetTemplate);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

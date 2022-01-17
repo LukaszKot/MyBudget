@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +33,7 @@ namespace MyBudget.App
             services.AddScoped<IOperationTemplateRepository, OperationTemplateRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBudgetService, BudgetService>();
+            services.AddScoped<IBudgetTemplateService, BudgetTemplateService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashingService, HashingService>();
             services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
