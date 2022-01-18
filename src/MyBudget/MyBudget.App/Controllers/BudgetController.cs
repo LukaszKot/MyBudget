@@ -41,5 +41,12 @@ namespace MyBudget.App.Controllers
             await _operationService.CreateOperationAsync(command);
             return Redirect($"/budget/{command.BudgetId}");
         }
+        
+        [HttpPost("operation/edit")]
+        public async Task<IActionResult> UpdateBudgetOperation(UpdateOperationCommand command)
+        {
+            await _operationService.UpdateOperationAsync(command);
+            return Redirect($"/budget/{command.BudgetId}");
+        }
     }
 }
