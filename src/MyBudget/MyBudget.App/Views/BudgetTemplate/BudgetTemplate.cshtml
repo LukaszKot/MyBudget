@@ -10,3 +10,13 @@
 {
     <div>@operation.Id, @operation.Name, @operation.CategoryName, @operation.DefaultValue, @operation.ValueType, @operation.BudgetTemplateId, @operation.OperationCategoryId</div>
 }
+<form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
+    <input type="text" name="Name" placeholder="Nazwa"/>
+    <input type="number" name="DefaultValue" placeholder="Wartość" step="0.01"/>
+    <select name="ValueType">
+        <option value="FixedAmount">PLN</option>
+        <option value="Percent">%</option>
+    </select>
+    <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+    <input type="submit" value="Dodaj!"/>
+</form>

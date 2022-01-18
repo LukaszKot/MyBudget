@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.BudgetTemplate;
+using MyBudget.App.Commands.OperationTemplate;
 using MyBudget.App.Queries.BudgetTemplate;
 using MyBudget.App.Services;
 
@@ -12,10 +13,12 @@ namespace MyBudget.App.Controllers
     public class BudgetTemplateController : BaseController
     {
         private readonly IBudgetTemplateService _budgetTemplateService;
+        private readonly IOperationTemplateService _operationTemplateService;
 
-        public BudgetTemplateController(IBudgetTemplateService budgetTemplateService)
+        public BudgetTemplateController(IBudgetTemplateService budgetTemplateService, IOperationTemplateService operationTemplateService)
         {
             _budgetTemplateService = budgetTemplateService;
+            _operationTemplateService = operationTemplateService;
         }
 
         [HttpPost]
@@ -31,6 +34,14 @@ namespace MyBudget.App.Controllers
         {
             var result = await _budgetTemplateService.GetBudgetTemplateOperationsAsync(query);
             return View("BudgetTemplate", result);
+        }
+        
+        [HttpPost("operation-template")]
+        public async Task<IActionResult> CreateOperationTemplate(CreateOperationTemplateCommand command)
+        {
+            command.UserId = UserId;
+            await _operationTemplateService.CreateOperationTemplateAsync(command);
+            return Redirect($"{command.BudgetTemplateId}");
         }
     }
 }
