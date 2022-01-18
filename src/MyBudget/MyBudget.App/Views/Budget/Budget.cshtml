@@ -1,0 +1,14 @@
+@model MyBudget.App.Queries.Budget.GetBudgetOperationsQueryResponse
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>@Model.Name, @Model.From</h2>
+@foreach (var operation in Model.Operations)
+{
+    <div>@operation.Id, @operation.Date, @operation.Name, @operation.CategoryName, @operation.DefaultValue, @operation.ValueType</div>
+}
+
+<h1>Podsumowanie: @Model.Total</h1>
