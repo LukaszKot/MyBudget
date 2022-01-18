@@ -52,7 +52,7 @@ namespace MyBudget.App.Domain
             {
                 throw new DomainException(DomainError.CannotRenameOperationIfInheritsFromTemplate);
             }
-            if (!RegexConsts.Username.IsMatch(name))
+            if (!RegexConsts.ObjectName.IsMatch(name))
             {
                 throw new DomainException(DomainError.InvalidObjectName);
             }

@@ -10,5 +10,16 @@
 {
     <div>@operation.Id, @operation.Date, @operation.Name, @operation.CategoryName, @operation.DefaultValue, @operation.ValueType</div>
 }
+<form asp-controller="Budget" asp-action="CreateBudgetOperation">
+    <input type="hidden" name="BudgetId" value="@Model.Id"/>
+    <input type="text" name="Name" placeholder="Nazwa" />
+    <input type="text" name="DefaultValue" placeholder="Wartość" />
+    <select name="ValueType">
+        <option value="FixedAmount">PLN</option>
+        <option value="Percent">%</option>
+    </select>
+    <input type="date" name="Date" placeholder="Data"/>
+    <input type="submit" value="Dodaj!"/>
+</form>
 
 <h1>Podsumowanie: @Model.Total</h1>

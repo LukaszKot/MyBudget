@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.Budget;
+using MyBudget.App.Commands.Operation;
 using MyBudget.App.Queries.Budget;
 using MyBudget.App.Services;
 
@@ -12,10 +13,12 @@ namespace MyBudget.App.Controllers
     public class BudgetController : BaseController
     {
         private readonly IBudgetService _budgetService;
+        private readonly IOperationService _operationService;
 
-        public BudgetController(IBudgetService budgetService)
+        public BudgetController(IBudgetService budgetService, IOperationService operationService)
         {
             _budgetService = budgetService;
+            _operationService = operationService;
         }
         
         [HttpPost]
@@ -24,12 +27,19 @@ namespace MyBudget.App.Controllers
             var budgetCreatedEvent = await _budgetService.CreateBudgetAsync(command);
             return Redirect($"/budget/{budgetCreatedEvent.Id}");
         }
-        
+
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetBudgetOperations([FromRoute] GetBudgetOperationsQuery query)
         {
             var result = await _budgetService.GetBudgetOperationsAsync(query);
             return View("Budget", result);
+        }
+        
+        [HttpPost("operation")]
+        public async Task<IActionResult> CreateBudgetOperation(CreateOperationCommand command)
+        {
+            await _operationService.CreateOperationAsync(command);
+            return Redirect($"/budget/{command.BudgetId}");
         }
     }
 }
