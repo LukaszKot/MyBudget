@@ -26,11 +26,11 @@ namespace MyBudget.App.Controllers
             return Redirect($"budget-template/{budgetTemplateCreatedEvent.Id}");
         }
         
-        [HttpGet]
-        public async Task<IActionResult> GetBudgetTemplateOperations(GetBudgetTemplateOperationsQuery query)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetBudgetTemplateOperations([FromRoute] GetBudgetTemplateOperationsQuery query)
         {
             var result = await _budgetTemplateService.GetBudgetTemplateOperationsAsync(query);
-            return View("BudgetTemplate", query);
+            return View("BudgetTemplate", result);
         }
     }
 }

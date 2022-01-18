@@ -19,7 +19,6 @@ namespace MyBudget.App.Repositories
         {
             return await _dbContext.BudgetTemplates
                 .Include(x => x.OperationTemplates)
-                .ThenInclude(x => x.OperationCategory)
                 .SingleOrDefaultAsync(x => x.Id == budgetId);
         }
 

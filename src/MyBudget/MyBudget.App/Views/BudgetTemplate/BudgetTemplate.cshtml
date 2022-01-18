@@ -1,0 +1,12 @@
+@model MyBudget.App.Queries.BudgetTemplate.GetBudgetTemplateOperationsQueryResponse
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>@Model.Name</h2>
+@foreach (var operation in Model.OperationTemplates)
+{
+    <div>@operation.Id, @operation.Name, @operation.CategoryName, @operation.DefaultValue, @operation.ValueType, @operation.BudgetTemplateId, @operation.OperationCategoryId</div>
+}
