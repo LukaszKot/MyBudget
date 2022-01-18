@@ -28,7 +28,7 @@ namespace MyBudget.App.Domain
 
         public void SetName(string name)
         {
-            if (!RegexConsts.Username.IsMatch(name))
+            if (!RegexConsts.ObjectName.IsMatch(name))
             {
                 throw new DomainException(DomainError.InvalidObjectName);
             }

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.User;
 using MyBudget.App.Services;
@@ -41,6 +42,7 @@ namespace MyBudget.App.Controllers
             return Redirect("/");
         }
         
+        [Authorize]
         [HttpGet("logout")]
         public async Task<IActionResult> Logout()
         {

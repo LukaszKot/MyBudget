@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Strona główna";
 }
-@model MyBudget.App.Queries.Budget.GetBudgetsQueryResponse
+@model MyBudget.App.Queries.Budget.GetBudgetsQueryResponse;
 
 <div>
     <h1>Witaj @User.Identity!.Name!</h1>
@@ -11,6 +11,11 @@
         {
             <div>@budgetTemplate.Name</div>
         }
+        <h3>Stwórz nowy szablon:</h3>
+        <form asp-controller="BudgetTemplate" asp-action="CreateBudgetTemplate">
+            <input type="text" placeholder="Nazwa" name="Name" />
+            <input type="submit" value="Stwórz!"/>
+        </form>
     </div>
     <div>
         <h2>Aktywne budżety</h2>
@@ -40,4 +45,5 @@
             <div>@categories.Name</div>
         }
     </div>
+    @Html.ActionLink("Wyloguj się!", "Logout", "User")
 </div>
