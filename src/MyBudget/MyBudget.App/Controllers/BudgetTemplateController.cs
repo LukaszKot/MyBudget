@@ -29,6 +29,13 @@ namespace MyBudget.App.Controllers
             return Redirect($"budget-template/{budgetTemplateCreatedEvent.Id}");
         }
         
+        [HttpPost("edit")]
+        public async Task<IActionResult> UpdateBudgetTemplate(UpdateBudgetTemplateCommand command)
+        {
+            await _budgetTemplateService.UpdateBudgetTemplateAsync(command);
+            return Redirect($"/");
+        }
+        
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetBudgetTemplateOperations([FromRoute] GetBudgetTemplateOperationsQuery query)
         {

@@ -9,7 +9,14 @@
         <h2>Szablony budżetów</h2>
         @foreach (var budgetTemplate in Model.BudgetTemplates)
         {
-            <div><a href="budget-template/@budgetTemplate.Id">@budgetTemplate.Name</a></div>
+            <div>
+                <a href="/budget-template/@budgetTemplate.Id">Podgląd</a>
+                <form asp-controller="BudgetTemplate" asp-action="UpdateBudgetTemplate">
+                    <input type="hidden" name="Id" value="@budgetTemplate.Id"/>
+                    <input type="text" name="Name" placeholder="Nazwa" value="@budgetTemplate.Name"/>
+                    <input type="submit" value="Edytuj!"/>
+                </form>
+            </div>
         }
         <h3>Stwórz nowy szablon:</h3>
         <form asp-controller="BudgetTemplate" asp-action="CreateBudgetTemplate">
