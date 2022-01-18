@@ -19,6 +19,12 @@
         </select>
         <input type="submit" value="Edytuj!"/>
     </form>
+    
+    <form asp-controller="BudgetTemplate" asp-action="DeleteOperationTemplate">
+        <input type="hidden" name="Id" value="@operation.Id" />
+        <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+        <input type="submit" value="Usuń!" />
+    </form>
 }
 <form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
     <input type="text" name="Name" placeholder="Nazwa"/>
