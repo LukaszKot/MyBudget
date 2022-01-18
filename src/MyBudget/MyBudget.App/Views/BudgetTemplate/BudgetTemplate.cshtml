@@ -8,7 +8,17 @@
 <h2>@Model.Name</h2>
 @foreach (var operation in Model.OperationTemplates)
 {
-    <div>@operation.Id, @operation.Name, @operation.CategoryName, @operation.DefaultValue, @operation.ValueType, @operation.BudgetTemplateId, @operation.OperationCategoryId</div>
+    <form asp-controller="BudgetTemplate" asp-action="UpdateOperationTemplate">
+        <input type="hidden" name="Id" value="@operation.Id" />
+        <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+        <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name" />
+        <input type="text" name="DefaultValue" placeholder="Domyślna wartość" value="@operation.DefaultValue" />
+        <select name="ValueType">
+            <option value="FixedAmount" selected>PLN</option>
+            <option value="Percent">%</option>
+        </select>
+        <input type="submit" value="Edytuj!"/>
+    </form>
 }
 <form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
     <input type="text" name="Name" placeholder="Nazwa"/>

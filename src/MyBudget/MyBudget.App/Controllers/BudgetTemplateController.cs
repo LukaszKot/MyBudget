@@ -43,5 +43,12 @@ namespace MyBudget.App.Controllers
             await _operationTemplateService.CreateOperationTemplateAsync(command);
             return Redirect($"{command.BudgetTemplateId}");
         }
+        
+        [HttpPost("operation-template/edit")]
+        public async Task<IActionResult> UpdateOperationTemplate(UpdateOperationTemplateCommand command)
+        {
+            await _operationTemplateService.UpdateOperationTemplateAsync(command);
+            return Redirect($"../{command.BudgetTemplateId}");
+        }
     }
 }

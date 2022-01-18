@@ -8,6 +8,7 @@ namespace MyBudget.App.Commands.OperationTemplate
         [Required] Guid Id, 
         [Required] string Name, 
         [Required] decimal DefaultValue, 
-        [Required] ValueType ValueType, 
+        [Required] ValueType ValueType,
+        [Required] Guid BudgetTemplateId,
         Guid? OperationCategoryId);
 }
