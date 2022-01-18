@@ -46,7 +46,7 @@ namespace MyBudget.App.Repositories
 
         public async Task Add(Budget budget)
         {
-            await _dbContext.AddAsync(budget);
+            await _dbContext.Budgets.AddAsync(budget);
             await _dbContext.SaveChangesAsync();
         }
     }

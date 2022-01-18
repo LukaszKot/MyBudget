@@ -9,13 +9,13 @@ namespace MyBudget.App.Domain
         public Guid BudgetId { get; init; }
         public Budget Budget { get; }
         public Guid? OperationTemplateId { get; init; }
-        public OperationTemplate? OperationTemplate { get; }
+        public OperationTemplate? OperationTemplate { get; set; }
         public string Name { get; private set; }
         public decimal Value { get; private set; }
         public ValueType ValueType { get; private set; }
         public DateTime Date { get; set; }
         public Guid? OperationCategoryId { get; set; }
-        public OperationCategory? OperationCategory { get; }
+        public OperationCategory? OperationCategory { get; set; }
         
         // for serialization
         private Operation()

@@ -36,6 +36,13 @@ namespace MyBudget.App.Controllers
             return Redirect($"/");
         }
         
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteBudgetTemplate(DeleteBudgetTemplateCommand command)
+        {
+            await _budgetTemplateService.DeleteBudgetTemplateAsync(command);
+            return Redirect($"/");
+        }
+        
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetBudgetTemplateOperations([FromRoute] GetBudgetTemplateOperationsQuery query)
         {

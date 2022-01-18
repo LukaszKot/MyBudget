@@ -8,13 +8,13 @@ namespace MyBudget.App.Domain
     {
         public Guid Id { get; init; }
         public Guid? BudgetTemplateId { get; init; }
-        public BudgetTemplate? BudgetTemplate { get; }
+        public BudgetTemplate? BudgetTemplate { get; set; }
         public string Name { get; private set; }
         public decimal DefaultValue { get; set; }
         public ValueType ValueType { get; set; }
         public Guid? OperationCategoryId { get; set; }
-        public OperationCategory? OperationCategory { get; }
-        public IEnumerable<Operation> Operations { get; }
+        public OperationCategory? OperationCategory { get; set; }
+        public IEnumerable<Operation> Operations { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
 

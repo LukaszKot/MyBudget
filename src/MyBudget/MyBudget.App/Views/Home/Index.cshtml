@@ -16,6 +16,14 @@
                     <input type="text" name="Name" placeholder="Nazwa" value="@budgetTemplate.Name"/>
                     <input type="submit" value="Edytuj!"/>
                 </form>
+                <form asp-controller="BudgetTemplate" asp-action="DeleteBudgetTemplate">
+                    <input type="hidden" name="Id" value="@budgetTemplate.Id"/>
+                    <input type="submit" value="Usuń!"/>
+                </form>
+                <form asp-controller="Budget" asp-action="CreateBudget">
+                    <input type="hidden" name="BudgetTemplateId" value="@budgetTemplate.Id"/>
+                    <input type="submit" value="Utwórz nowy budżet!"/>
+                </form>
             </div>
         }
         <h3>Stwórz nowy szablon:</h3>
