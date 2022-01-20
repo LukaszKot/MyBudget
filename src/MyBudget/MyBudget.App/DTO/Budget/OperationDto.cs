@@ -1,4 +1,5 @@
 using System;
+using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.DTO.Budget
 {

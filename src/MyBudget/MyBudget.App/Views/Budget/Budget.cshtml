@@ -1,3 +1,4 @@
+@using ValueType = MyBudget.App.Domain.ValueType
 @model MyBudget.App.Queries.Budget.GetBudgetOperationsQueryResponse
 
 @{
@@ -15,8 +16,16 @@
                 <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name"/>
                 <input type="text" name="DefaultValue" placeholder="Wartość" value="@operation.Value"/>
                 <select name="ValueType">
-                    <option value="FixedAmount" selected>PLN</option>
-                    <option value="Percent">%</option>
+                    @if(operation.ValueType == ValueType.FixedAmount)
+                    {
+                        <option value="FixedAmount" selected>PLN</option>
+                        <option value="Percent">%</option>
+                    }
+                    else
+                    {
+                        <option value="FixedAmount" >PLN</option>
+                        <option value="Percent" selected>%</option>
+                    }
                 </select>
                 <input type="text" name="Date" placeholder="Data" value="@operation.Date"/>
                 <input type="submit" value="Edytuj!"/>
