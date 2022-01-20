@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using MyBudget.App.Domain;
 using MyBudget.App.Exceptions;
 
 namespace MyBudget.App.Services
@@ -6,7 +7,7 @@ namespace MyBudget.App.Services
     public class PasswordPolicyEnforcer : IPasswordPolicyEnforcer
     {
         private readonly Regex _passwordRegex 
-            = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+            = new(RegexConsts.Password);
         public void Validate(string username, string password, string repeatedPassword)
         {
             if (string.IsNullOrEmpty(password))

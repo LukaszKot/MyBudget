@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBudget.App.Commands.User;
+using MyBudget.App.Exceptions;
 using MyBudget.App.Services;
 
 namespace MyBudget.App.Controllers
@@ -20,11 +21,11 @@ namespace MyBudget.App.Controllers
         public async Task<IActionResult> Register([FromForm] RegisterUserCommand registerUserCommand)
         {
             await _userService.RegisterAsync(registerUserCommand);
-            return View("RegisterResult");
+            return Redirect("login");
         }
         
         [HttpGet("register")]
-        public IActionResult RegisterForm()
+        public IActionResult RegisterForm([FromQuery] DomainError? domainError)
         {
             return View("Register");
         }

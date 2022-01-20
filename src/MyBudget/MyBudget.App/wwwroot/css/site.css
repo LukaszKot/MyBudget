@@ -2,6 +2,7 @@ body
 {
   background-color: #36688D;
   color: #F3CD05;
+  text-align: center;
 }
 
 .register
@@ -12,7 +13,7 @@ body
   transform: translate(-50%, -50%);
   padding: 10px;
   width: 350px;
-  height: 250px;
+  height: 300px;
   border: 1px solid #F3CD05;
   border-radius: 20px;
   text-align: center;
@@ -61,4 +62,105 @@ button:hover
 {
   background-color: #F18904;
   cursor: pointer;
+}
+
+.element
+{
+  text-align: left;
+  height: 50px;
+  padding: 30px;
+  border: 1px solid #F3CD05;
+}
+
+.element a
+{
+  float: left;
+  display: block;
+  width: 100px;
+  margin: 10px;
+  padding: 5px;
+  color: #36688D;
+  background-color: #F49F05;
+  outline: 0;
+  border: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.element form
+{
+  display: block;
+  float: left;
+}
+
+.element input[type="submit"]
+{
+  width: 200px;
+  margin: 10px;
+  padding: 5px;
+  color: #36688D;
+  background-color: #F49F05;
+  outline: 0;
+  border: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.element input[type="text"]
+{
+  background-color: inherit;
+  outline: 0;
+  border: none;
+  color: #F3CD05;
+  width: 300px;
+  height: 20px;
+  font-size: 15px;
+  border-bottom: 2px solid #F3CD05;
+  margin: 5px;
+}
+
+.element input[type="text"]::placeholder
+{
+  color: #BDA589;
+}
+
+.element input[type="text"]:focus
+{
+  border-color: #F18904;
+}
+
+.element input[type="submit"]:hover, .element a:hover
+{
+  background-color: #F18904;
+  cursor: pointer;
+}
+
+.element h5
+{
+  float: left;
+}
+
+
+.section
+{
+  margin: 10px auto;
+  width: 80%;
+  border: 2px solid #C1AB03;
+  border-radius: 20px;
+  padding-bottom: 15px;
+}
+
+.element span
+{
+  display: block;
+  float: left;
+  padding-top: 15px;
+  
 }

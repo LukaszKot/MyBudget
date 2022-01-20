@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyBudget.App.Commands.BudgetTemplate;
 using MyBudget.App.Services;
 
 namespace MyBudget.App.Controllers
@@ -21,6 +20,11 @@ namespace MyBudget.App.Controllers
         {
             var model = await _budgetService.GetBudgetsAsync(UserId);
             return View(model);
+        }
+        
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }

@@ -45,6 +45,7 @@ namespace MyBudget.App
             {
                 x.MaxModelValidationErrors = 50;
                 x.Filters.Add<ValidateModelAttribute>();
+                x.Filters.Add<ExceptionFilter>();
             });
             services.AddHostedService<DatabaseMigrationHostedService>();
 

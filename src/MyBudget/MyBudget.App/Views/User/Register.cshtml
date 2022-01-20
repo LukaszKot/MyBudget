@@ -1,21 +1,27 @@
 @model MyBudget.App.Commands.User.RegisterUserCommand
-
+@{
+    ViewBag.Title = "Rejestracja";
+    Layout = "_Layout";
+}
 <form class="register" asp-action="Register">
-       <input type="text" 
-              asp-for="Username" 
-              id="username" 
-              placeholder="Login" 
+       <input type="text"
+              asp-for="Username"
+              id="username"
+              placeholder="Login"
               class="text-field"/>
        <span asp-validation-for="Username"></span>
-    <input type="password" 
-           asp-for="Password" 
-           id="password" 
-           placeholder="Hasło" 
-           class="text-field"/>
-    <input type="password" 
-           asp-for="RepeatPassword" 
-           id="repeat-password" 
-           placeholder="Powtórz hasło" 
-           class="text-field"/>
-    <button type="submit" value="Register">Zarejestruj się!</button>
+       <input type="password"
+              asp-for="Password"
+              id="password"
+              placeholder="Hasło"
+              class="text-field"/>
+       <span asp-validation-for="Password"></span>
+       <input type="password"
+              asp-for="RepeatPassword"
+              id="repeat-password"
+              placeholder="Powtórz hasło"
+              class="text-field"/>
+       <span asp-validation-for="RepeatPassword"></span>
+       <span>@ViewBag.Error</span>
+       <button type="submit" value="Register">Zarejestruj się!</button>
 </form>

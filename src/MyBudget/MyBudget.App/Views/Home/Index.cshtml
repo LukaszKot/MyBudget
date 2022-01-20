@@ -1,15 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Strona główna";
+    Layout = "_Layout";
 }
 @model MyBudget.App.Queries.Budget.GetBudgetsQueryResponse;
 
 <div>
-    <h1>Witaj @User.Identity!.Name!</h1>
-    <div>
-        <h2>Szablony budżetów</h2>
+    <h3>Witaj @User.Identity!.Name!</h3>
+    <div class="section">
+        <h4>Szablony budżetów</h4>
         @foreach (var budgetTemplate in Model.BudgetTemplates)
         {
-            <div>
+            <div class="element">
                 <a href="/budget-template/@budgetTemplate.Id">Podgląd</a>
                 <form asp-controller="BudgetTemplate" asp-action="UpdateBudgetTemplate">
                     <input type="hidden" name="Id" value="@budgetTemplate.Id"/>
@@ -24,50 +25,58 @@
                     <input type="hidden" name="BudgetTemplateId" value="@budgetTemplate.Id"/>
                     <input type="submit" value="Utwórz nowy budżet!"/>
                 </form>
+                <div style="clear: both"></div>
             </div>
         }
-        <h3>Stwórz nowy szablon:</h3>
-        <form asp-controller="BudgetTemplate" asp-action="CreateBudgetTemplate">
-            <input type="text" placeholder="Nazwa" name="Name" />
-            <input type="submit" value="Stwórz!"/>
-        </form>
+        <div class="element">
+            <h5>Stwórz nowy szablon:</h5>
+            <form asp-controller="BudgetTemplate" asp-action="CreateBudgetTemplate">
+                <input type="text" placeholder="Nazwa" name="Name"/>
+                <input type="submit" value="Stwórz!"/>
+            </form>
+        </div>
     </div>
-    <div>
-        <h2>Aktywne budżety</h2>
+    <div class="section">
+        <h4>Aktywne budżety</h4>
         @foreach (var activeBudget in Model.ActiveBudgets)
         {
-            <div>
+            <div class="element">
                 <a href="/budget/@activeBudget.Id">Podgląd</a>
-                @activeBudget.Name, Od: @activeBudget.From
+                <span>Nazwa: @activeBudget.Name, Data rozpoczęcia budżetu: @activeBudget.From.Date.ToString("dd/MM/yyyy")</span>
                 <form asp-controller="Budget" asp-action="ArchiveBudget">
                     <input type="hidden" name="Id" value="@activeBudget.Id"/>
                     <input type="submit" value="Archiwizuj!"/>
                 </form>
+                <div style="clear: both" ></div>
             </div>
         }
     </div>
-    <div>
-        <h2>Historyczne budżety</h2>
+    <div class="section">
+        <h4>Historyczne budżety</h4>
         @foreach (var archivedBudget in Model.ArchivedBudgets)
         {
-            <div>
+            <div class="element">
                 <a href="/budget/archived/@archivedBudget.Id">Podgląd</a>
-                @archivedBudget.Name, @archivedBudget.From, @archivedBudget.To
+                <span>Nazwa: @archivedBudget.Name, Data rozpoczęcia: @archivedBudget.From.Date.ToString("dd/MM/yyyy"), Data zakończenia: @archivedBudget.To!?.Date.ToString("dd/MM/yyyy")</span>
+                <div style="clear: both"></div>
             </div>
         }
     </div>
-    <div>
-        <h2>Schematy operacji</h2>
+    <div class="section">
+        <h4>Schematy operacji</h4>
         @foreach (var operationTemplate in Model.OperationTemplates)
         {
-            <div>@operationTemplate.Name, @operationTemplate.CategoryName, @operationTemplate.DefaultValue, @operationTemplate.ValueType, @operationTemplate.BudgetTemplateId</div>
+            <div class="element">
+                <span>@operationTemplate.Name, @operationTemplate.CategoryName, @operationTemplate.DefaultValue, @operationTemplate.ValueType, @operationTemplate.BudgetTemplateId</span>
+                <div style="clear: both" />
+            </div>
         }
     </div>
-    <div>
-        <h2>Kategorie operacji</h2>
+    <div class="section">
+        <h4>Kategorie operacji</h4>
         @foreach (var categories in Model.Categories)
         {
-            <div>@categories.Name</div>
+            <div class="element">@categories.Name</div>
         }
     </div>
     @Html.ActionLink("Wyloguj się!", "Logout", "User")
