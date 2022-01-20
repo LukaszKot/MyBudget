@@ -5,4 +5,13 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h2>Archiwum: @Model.Name, @Model.From, @Model.To</h2>
+
+@foreach (var operation in Model.Operations)
+{
+    <div>
+        @operation.Name, @operation.Date, @operation.DefaultValue, @operation.ValueType, @operation.CategoryName
+    </div>
+}
+
+<h3>Wynik: @Model.Total PLN</h3>
