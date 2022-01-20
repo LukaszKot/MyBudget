@@ -1,41 +1,47 @@
 @model MyBudget.App.Queries.Budget.GetBudgetOperationsQueryResponse
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Aktywny budżet - "+ Model.Name;
     Layout = "_Layout";
 }
+<div class="section">
+    <h2>@Model.Name - Aktywny od: @Model.From</h2>
+    @foreach (var operation in Model.Operations)
+    {
+        <div class="element">
+            <form asp-controller="Budget" asp-action="UpdateBudgetOperation">
+                <input type="hidden" name="BudgetId" value="@Model.Id"/>
+                <input type="hidden" name="Id" value="@operation.Id"/>
+                <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name"/>
+                <input type="text" name="DefaultValue" placeholder="Wartość" value="@operation.Value"/>
+                <select name="ValueType">
+                    <option value="FixedAmount" selected>PLN</option>
+                    <option value="Percent">%</option>
+                </select>
+                <input type="text" name="Date" placeholder="Data" value="@operation.Date"/>
+                <input type="submit" value="Edytuj!"/>
+            </form>
+            <form asp-controller="Budget" asp-action="DeleteBudgetOperation">
+                <input type="hidden" name="BudgetId" value="@Model.Id"/>
+                <input type="hidden" name="Id" value="@operation.Id"/>
+                <input type="submit" value="Usuń!"/>
+            </form>
 
-<h2>@Model.Name, @Model.From</h2>
-@foreach (var operation in Model.Operations)
-{
-    <form asp-controller="Budget" asp-action="UpdateBudgetOperation">
-        <input type="hidden" name="BudgetId" value="@Model.Id"/>
-        <input type="hidden" name="Id" value="@operation.Id"/>
-        <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name"/>
-        <input type="text" name="DefaultValue" placeholder="Wartość" value="@operation.DefaultValue"/>
-        <select name="ValueType">
-            <option value="FixedAmount" selected>PLN</option>
-            <option value="Percent">%</option>
-        </select>
-        <input type="text" name="Date" placeholder="Data" value="@operation.Date"/>
-        <input type="submit" value="Edytuj!"/>
-    </form>
-    <form asp-controller="Budget" asp-action="DeleteBudgetOperation">
-        <input type="hidden" name="BudgetId" value="@Model.Id"/>
-        <input type="hidden" name="Id" value="@operation.Id"/>
-        <input type="submit" value="Usuń!"/>
-    </form>
-}
-<form asp-controller="Budget" asp-action="CreateBudgetOperation">
-    <input type="hidden" name="BudgetId" value="@Model.Id"/>
-    <input type="text" name="Name" placeholder="Nazwa" />
-    <input type="text" name="DefaultValue" placeholder="Wartość" />
-    <select name="ValueType">
-        <option value="FixedAmount">PLN</option>
-        <option value="Percent">%</option>
-    </select>
-    <input type="date" name="Date" placeholder="Data"/>
-    <input type="submit" value="Dodaj!"/>
-</form>
-
-<h1>Podsumowanie: @Model.Total</h1>
+        </div>
+    }
+    <div class="element">
+        <form asp-controller="Budget" asp-action="CreateBudgetOperation">
+            <input type="hidden" name="BudgetId" value="@Model.Id"/>
+            <input type="text" name="Name" placeholder="Nazwa"/>
+            <input type="text" name="DefaultValue" placeholder="Wartość"/>
+            <select name="ValueType">
+                <option value="FixedAmount">PLN</option>
+                <option value="Percent">%</option>
+            </select>
+            <input type="date" name="Date" placeholder="Data"/>
+            <input type="submit" value="Dodaj!"/>
+        </form>
+    </div>
+    <h1>Podsumowanie: @Model.Total</h1>
+    @Html.ActionLink("Powrót do strony głównej", "Index", "Home")
+</div>

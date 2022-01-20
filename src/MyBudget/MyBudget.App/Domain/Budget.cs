@@ -36,15 +36,20 @@ namespace MyBudget.App.Domain
             To = DateTime.UtcNow;
         }
 
-        public decimal Total()
+        public decimal GetTotal()
         {
-            var income = Operations
-                .Where(x => x.Value > 0)
-                .Sum(x => x.Value);
+            var income = GetIncome();
             var expenses = Operations
                 .Where(x => x.Value < 0)
-                .Sum(x => x.ValueType == ValueType.FixedAmount ? x.Value : x.Value * income);
-            return income - expenses;
+                .Sum(x => x.ValueType == ValueType.FixedAmount ? x.Value : x.Value/100 * income);
+            return income + expenses;
+        }
+
+        public decimal GetIncome()
+        {
+            return Operations
+                .Where(x => x.Value > 0)
+                .Sum(x => x.Value);
         }
     }
 }

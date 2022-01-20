@@ -1,17 +1,31 @@
+@using ValueType = MyBudget.App.Domain.ValueType
 @model MyBudget.App.Queries.Budget.GetArchivedBudgetOperationsQueryResponse
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Archiwum - "+ Model.Name;
     Layout = "_Layout";
 }
+<div class="section">
+    <h2>Archiwum: @Model.Name, @Model.From, @Model.To</h2>
+    @{
+        foreach (var operation in Model.Operations)
+        {
+            <div class="element">
+            <span>Nazwa: @operation.Name, Data: @operation.Date,
+            @if (operation.ValueType.Equals(ValueType.Percent))
+            {
+                @:Wartość rzeczywista: @operation.RealValue PLN, Wartość procentowa: @operation.Value, Typ wartości: %
+            }
+            else
+            {
+                @:Wartość: @operation.RealValue PLN, Typ wartości: stała
+            }
+            @operation.CategoryName</span>
+            </div>
+        }
+    }
 
-<h2>Archiwum: @Model.Name, @Model.From, @Model.To</h2>
 
-@foreach (var operation in Model.Operations)
-{
-    <div>
-        @operation.Name, @operation.Date, @operation.DefaultValue, @operation.ValueType, @operation.CategoryName
-    </div>
-}
-
-<h3>Wynik: @Model.Total PLN</h3>
+    <h3>Wynik: @Model.Total PLN</h3>
+    @Html.ActionLink("Powrót do strony głównej", "Index", "Home")
+</div>

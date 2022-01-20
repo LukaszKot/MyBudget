@@ -1,38 +1,44 @@
 @model MyBudget.App.Queries.BudgetTemplate.GetBudgetTemplateOperationsQueryResponse
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Schemat budżetu - "+Model.Name;
     Layout = "_Layout";
 }
-
-<h2>@Model.Name</h2>
-@foreach (var operation in Model.OperationTemplates)
-{
-    <form asp-controller="BudgetTemplate" asp-action="UpdateOperationTemplate">
-        <input type="hidden" name="Id" value="@operation.Id" />
-        <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
-        <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name" />
-        <input type="text" name="DefaultValue" placeholder="Domyślna wartość" value="@operation.DefaultValue" />
-        <select name="ValueType">
-            <option value="FixedAmount" selected>PLN</option>
-            <option value="Percent">%</option>
-        </select>
-        <input type="submit" value="Edytuj!"/>
-    </form>
-    
-    <form asp-controller="BudgetTemplate" asp-action="DeleteOperationTemplate">
-        <input type="hidden" name="Id" value="@operation.Id" />
-        <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
-        <input type="submit" value="Usuń!" />
-    </form>
-}
-<form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
-    <input type="text" name="Name" placeholder="Nazwa"/>
-    <input type="number" name="DefaultValue" placeholder="Wartość" step="0.01"/>
-    <select name="ValueType">
-        <option value="FixedAmount">PLN</option>
-        <option value="Percent">%</option>
-    </select>
-    <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
-    <input type="submit" value="Dodaj!"/>
-</form>
+<div class="section">
+    <h2>@Model.Name</h2>
+    @foreach (var operation in Model.OperationTemplates)
+    {
+        <div class="element">
+            <form asp-controller="BudgetTemplate" asp-action="UpdateOperationTemplate">
+                <input type="hidden" name="Id" value="@operation.Id" />
+                <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+                <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name" />
+                <input type="text" name="DefaultValue" placeholder="Domyślna wartość" value="@operation.DefaultValue" />
+                <select name="ValueType">
+                    <option value="FixedAmount" selected>PLN</option>
+                    <option value="Percent">%</option>
+                </select>
+                <input type="submit" value="Edytuj!"/>
+            </form>
+            
+            <form asp-controller="BudgetTemplate" asp-action="DeleteOperationTemplate">
+                <input type="hidden" name="Id" value="@operation.Id" />
+                <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+                <input type="submit" value="Usuń!" />
+            </form>
+        </div>
+    }
+    <div class="element">
+        <form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
+            <input type="text" name="Name" placeholder="Nazwa"/>
+            <input type="number" name="DefaultValue" placeholder="Wartość" step="0.01"/>
+            <select name="ValueType">
+                <option value="FixedAmount">PLN</option>
+                <option value="Percent">%</option>
+            </select>
+            <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
+            <input type="submit" value="Dodaj!"/>
+        </form>
+    </div>
+    @Html.ActionLink("Powrót do strony głównej", "Index", "Home")
+</div>

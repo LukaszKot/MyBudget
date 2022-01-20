@@ -30,6 +30,7 @@ namespace MyBudget.App.Repositories
                 .Include(x =>x.BudgetTemplate)
                 .Include(x => x.Operations)
                 .ThenInclude(x => x.OperationCategory)
+                .OrderByDescending(x => x.From)
                 .SingleOrDefaultAsync(x => x.Id == budgetId);
         }
 

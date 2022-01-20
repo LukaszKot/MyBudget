@@ -8,6 +8,7 @@ using MyBudget.App.DTO.Budget;
 using MyBudget.App.Events.Budget;
 using MyBudget.App.Queries.Budget;
 using MyBudget.App.Repositories;
+using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Services
 {
@@ -37,16 +38,19 @@ namespace MyBudget.App.Services
 
             var budgetTemplates = budgetsTemplates.ToList();
             var budgetTemplatesDtos = budgetTemplates
-                .Select(x => new BudgetTemplateDto(x.Id, x.Name));
+                .Select(x => new BudgetTemplateDto(x.Id, x.Name))
+                .OrderBy(x => x.Name);
             var activeBudget = budgetTemplates
                 .SelectMany(x => x.Budgets)
                 .Where(x => x.BudgetType == BudgetType.Active)
-                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To));
+                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To))
+                .OrderByDescending(x=>x.From);
             
             var archivedBudget = budgetTemplates
                 .SelectMany(x => x.Budgets)
                 .Where(x => x.BudgetType == BudgetType.Historical)
-                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To));
+                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To))
+                .OrderByDescending(x => x.To);
             
             var operationTemplates = await operationTemplatesTask;
             var operationTemplatesDto = operationTemplates.Select(x => new OperationTemplateDto(x.Id, x.Name,
@@ -65,7 +69,7 @@ namespace MyBudget.App.Services
             return new GetBudgetOperationsQueryResponse(queryResult.Id,
                 queryResult.BudgetTemplate.Name,
                 queryResult.From,
-                queryResult.Total(),
+                queryResult.GetTotal(),
                 queryResult.Operations
                     .Select(x => new OperationDto(
                         x.Id, 
@@ -75,7 +79,8 @@ namespace MyBudget.App.Services
                         x.Date, 
                         x.OperationTemplateId, 
                         x.OperationCategoryId, 
-                        x.OperationCategory?.Name)));
+                        x.OperationCategory?.Name,
+                        x.ValueType == ValueType.Percent ? queryResult.GetIncome()*x.Value : x.Value)));
         }
 
         public async Task<BudgetCreatedEvent> ArchiveBudgetAsync(ArchiveBudgetCommand command)
@@ -104,7 +109,7 @@ namespace MyBudget.App.Services
                 archivedBudget.BudgetTemplate.Name,
                 archivedBudget.From,
                 archivedBudget.To!.Value,
-                archivedBudget.Total(),
+                archivedBudget.GetTotal(),
                 archivedBudget.Operations.Select(x =>
                     new OperationDto(x.Id,
                         x.Name, x.Value,
@@ -112,7 +117,8 @@ namespace MyBudget.App.Services
                         x.Date,
                         x.OperationTemplateId,
                         x.OperationCategoryId,
-                        x.OperationCategory?.Name)),
+                        x.OperationCategory?.Name,
+                        x.ValueType == ValueType.Percent ? archivedBudget.GetIncome()*x.Value : x.Value)),
                 new StatisticsDto(new List<StatisticDto>()));
         }
     }
