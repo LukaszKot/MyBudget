@@ -48,5 +48,12 @@ namespace MyBudget.App.Controllers
             await _operationService.UpdateOperationAsync(command);
             return Redirect($"/budget/{command.BudgetId}");
         }
+        
+        [HttpPost("operation/delete")]
+        public async Task<IActionResult> DeleteBudgetOperation(DeleteOperationCommand command)
+        {
+            await _operationService.DeleteOperationAsync(command);
+            return Redirect($"/budget/{command.BudgetId}");
+        }
     }
 }
