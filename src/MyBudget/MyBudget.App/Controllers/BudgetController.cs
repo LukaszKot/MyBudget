@@ -62,5 +62,12 @@ namespace MyBudget.App.Controllers
             await _budgetService.ArchiveBudgetAsync(command);
             return Redirect($"/");
         }
+        
+        [HttpGet("archived/{Id}")]
+        public async Task<IActionResult> GetArchivedBudget([FromRoute] GetBudgetOperationsQuery query)
+        {
+            var archivedBudget = await _budgetService.GetArchivedBudgetAsync(query);
+            return View("Archived",archivedBudget);
+        }
     }
 }

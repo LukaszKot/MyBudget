@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyBudget.App.Commands.Budget;
@@ -92,6 +93,27 @@ namespace MyBudget.App.Services
             var budget = new Budget(budgetTemplate);
             await _budgetRepository.Add(budget);
             return new BudgetCreatedEvent(budget.Id);
+        }
+
+        public async Task<GetArchivedBudgetOperationsQueryResponse> GetArchivedBudgetAsync(GetBudgetOperationsQuery query)
+        {
+            var archivedBudget = await _budgetRepository.GetBudgetOperations(query.Id);
+
+            return new GetArchivedBudgetOperationsQueryResponse(
+                archivedBudget.Id,
+                archivedBudget.BudgetTemplate.Name,
+                archivedBudget.From,
+                archivedBudget.To!.Value,
+                archivedBudget.Total(),
+                archivedBudget.Operations.Select(x =>
+                    new OperationDto(x.Id,
+                        x.Name, x.Value,
+                        x.ValueType,
+                        x.Date,
+                        x.OperationTemplateId,
+                        x.OperationCategoryId,
+                        x.OperationCategory?.Name)),
+                new StatisticsDto(new List<StatisticDto>()));
         }
     }
 }

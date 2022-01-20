@@ -50,7 +50,10 @@
         <h2>Historyczne budżety</h2>
         @foreach (var archivedBudget in Model.ArchivedBudgets)
         {
-            <div>@archivedBudget.Name, @archivedBudget.From, @archivedBudget.To</div>
+            <div>
+                <a href="/budget/archived/@archivedBudget.Id">Podgląd</a>
+                @archivedBudget.Name, @archivedBudget.From, @archivedBudget.To
+            </div>
         }
     </div>
     <div>

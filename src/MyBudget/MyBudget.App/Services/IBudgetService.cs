@@ -12,5 +12,6 @@ namespace MyBudget.App.Services
         Task<GetBudgetOperationsQueryResponse> GetBudgetOperationsAsync(GetBudgetOperationsQuery query);
         Task<BudgetCreatedEvent> ArchiveBudgetAsync(ArchiveBudgetCommand command);
         Task<BudgetCreatedEvent> CreateBudgetAsync(CreateBudgetCommand command);
+        Task<GetArchivedBudgetOperationsQueryResponse> GetArchivedBudgetAsync(GetBudgetOperationsQuery query);
     }
 }
