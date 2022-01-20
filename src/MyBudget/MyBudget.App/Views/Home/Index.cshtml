@@ -36,7 +36,14 @@
         <h2>Aktywne budżety</h2>
         @foreach (var activeBudget in Model.ActiveBudgets)
         {
-            <div>@activeBudget.Name, @activeBudget.From, @activeBudget.To</div>
+            <div>
+                <a href="/budget/@activeBudget.Id">Podgląd</a>
+                @activeBudget.Name, Od: @activeBudget.From
+                <form asp-controller="Budget" asp-action="ArchiveBudget">
+                    <input type="hidden" name="Id" value="@activeBudget.Id"/>
+                    <input type="submit" value="Archiwizuj!"/>
+                </form>
+            </div>
         }
     </div>
     <div>

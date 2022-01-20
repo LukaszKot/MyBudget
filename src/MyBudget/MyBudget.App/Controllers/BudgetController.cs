@@ -55,5 +55,12 @@ namespace MyBudget.App.Controllers
             await _operationService.DeleteOperationAsync(command);
             return Redirect($"/budget/{command.BudgetId}");
         }
+        
+        [HttpPost("archive")]
+        public async Task<IActionResult> ArchiveBudget(ArchiveBudgetCommand command)
+        {
+            await _budgetService.ArchiveBudgetAsync(command);
+            return Redirect($"/");
+        }
     }
 }
