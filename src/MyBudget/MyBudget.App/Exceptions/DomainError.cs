@@ -11,6 +11,7 @@ namespace MyBudget.App.Exceptions
         InvalidObjectName,
         InvalidOperationValue,
         CannotRenameOperationIfInheritsFromTemplate,
-        InvalidCredentials
+        InvalidCredentials,
+        InvalidDate
     }
 }

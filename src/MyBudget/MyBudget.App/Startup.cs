@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using MyBudget.App.Database;
 using MyBudget.App.Filters;
 using MyBudget.App.HostedServices;
+using MyBudget.App.Middleware;
 using MyBudget.App.Repositories;
 using MyBudget.App.Services;
 
@@ -46,6 +48,8 @@ namespace MyBudget.App
                 x.MaxModelValidationErrors = 50;
                 x.Filters.Add<ValidateModelAttribute>();
                 x.Filters.Add<ExceptionFilter>();
+                x.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                    _ => "Wartość musi zostać podana.");
             });
             services.AddHostedService<DatabaseMigrationHostedService>();
 
@@ -69,6 +73,8 @@ namespace MyBudget.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseMiddleware<BodyRewindMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
     

@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using MyBudget.App.Exceptions;
 
 namespace MyBudget.App.Domain
 {
@@ -8,9 +9,9 @@ namespace MyBudget.App.Domain
         public const string Username = @"^[A-Za-z][A-Za-z0-9_]{4,20}$";
         public const string Password = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
 
-        public static bool IsMatch(this string regex, string value)
+        public static bool IsMatch(this string regex, string? value)
         {
-            return Regex.IsMatch(value, regex);
+            return !string.IsNullOrEmpty(value) && Regex.IsMatch(value, regex);
         }
     }
 }

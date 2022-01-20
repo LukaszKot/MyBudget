@@ -24,7 +24,7 @@ namespace MyBudget.App.Domain
             
         }
 
-        public OperationTemplate(Guid userId, string name, decimal defaultValue, ValueType valueType,
+        public OperationTemplate(Guid userId, string? name, decimal? defaultValue, ValueType? valueType,
             Guid? budgetTemplateId = null, Guid? operationCategoryId = null)
         {
             Id = Guid.NewGuid();
@@ -35,18 +35,22 @@ namespace MyBudget.App.Domain
             OperationCategoryId = operationCategoryId;
         }
 
-        public void SetName(string name)
+        public void SetName(string? name)
         {
             if (!RegexConsts.ObjectName.IsMatch(name))
             {
                 throw new DomainException(DomainError.InvalidObjectName);
             }
-            Name = name;
+            Name = name!;
         }
         
-        public void SetValue(decimal defaultValue, ValueType valueType)
+        public void SetValue(decimal? defaultValue, ValueType? valueType)
         {
-            if (valueType == ValueType.Percent && Math.Abs(defaultValue) > 100)
+            if (defaultValue == null || valueType == null)
+            {
+                throw new DomainException(DomainError.InvalidOperationValue);
+            }
+            if (valueType == ValueType.Percent && Math.Abs(defaultValue.Value) > 100)
             {
                 throw new DomainException(DomainError.InvalidOperationValue);
             }
@@ -56,8 +60,8 @@ namespace MyBudget.App.Domain
                 throw new DomainException(DomainError.InvalidOperationValue);
             }
 
-            DefaultValue = defaultValue;
-            ValueType = valueType;
+            DefaultValue = defaultValue.Value;
+            ValueType = valueType.Value;
         }
     }
 }

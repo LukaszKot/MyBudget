@@ -13,7 +13,7 @@ namespace MyBudget.App.Domain
         public string Name { get; private set; }
         public decimal Value { get; private set; }
         public ValueType ValueType { get; private set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; private set; }
         public Guid? OperationCategoryId { get; set; }
         public OperationCategory? OperationCategory { get; set; }
         
@@ -23,7 +23,7 @@ namespace MyBudget.App.Domain
             
         }
         
-        public Operation(Guid budgetId, string name, decimal value, ValueType valueType,
+        public Operation(Guid budgetId, string? name, decimal? value, ValueType? valueType,
             DateTime? date = null, Guid? operationCategoryId = null)
         {
             Id = Guid.NewGuid();
@@ -46,7 +46,7 @@ namespace MyBudget.App.Domain
             OperationCategory = operationTemplate.OperationCategory;
         }
         
-        public void SetName(string name)
+        public void SetName(string? name)
         {
             if (OperationCategoryId != null)
             {
@@ -56,12 +56,16 @@ namespace MyBudget.App.Domain
             {
                 throw new DomainException(DomainError.InvalidObjectName);
             }
-            Name = name;
+            Name = name!;
         }
 
-        public void SetValue(decimal value, ValueType valueType)
+        public void SetValue(decimal? value, ValueType? valueType)
         {
-            if (valueType == ValueType.Percent && Math.Abs(value) > 100)
+            if (value == null || valueType == null)
+            {
+                throw new DomainException(DomainError.InvalidOperationValue);
+            }
+            if (valueType == ValueType.Percent && Math.Abs(value.Value) > 100)
             {
                 throw new DomainException(DomainError.InvalidOperationValue);
             }
@@ -71,8 +75,14 @@ namespace MyBudget.App.Domain
                 throw new DomainException(DomainError.InvalidOperationValue);
             }
 
-            Value = value;
-            ValueType = valueType;
+            Value = value.Value;
+            ValueType = valueType.Value;
+        }
+
+        public void SetDate(DateTime? dateTime)
+        {
+            if (dateTime == null) throw new DomainException(DomainError.InvalidDate);
+            Date = dateTime.Value;
         }
     }
 }

@@ -32,6 +32,7 @@
             <h5>Stwórz nowy szablon:</h5>
             <form asp-controller="BudgetTemplate" asp-action="CreateBudgetTemplate">
                 <input type="text" placeholder="Nazwa" name="Name"/>
+                <input type="hidden" name="FormUrl" value="/"/>
                 <input type="submit" value="Stwórz!"/>
             </form>
         </div>

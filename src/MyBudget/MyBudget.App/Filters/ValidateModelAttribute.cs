@@ -57,6 +57,8 @@ namespace MyBudget.App.Filters
                     return "Nieprawidłowa wartość operacji i jej typ!";
                 case DomainError.CannotRenameOperationIfInheritsFromTemplate:
                     return "Nie można zmienić nazwy operacji jeżeli pochodzi ze schematu!";
+                case DomainError.InvalidDate:
+                    return "Niepoprawna data!";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(domainError), domainError, null);
             }

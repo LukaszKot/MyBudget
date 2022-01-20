@@ -1,11 +1,10 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace MyBudget.App.Commands.BudgetTemplate
 {
-    public record CreateBudgetTemplateCommand(
-        [Required] string Name)
+    public class CreateBudgetTemplateCommand : CommandWithServiceValidation
     {
-        public Guid UserId { get; set; }
+        public string? Name { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

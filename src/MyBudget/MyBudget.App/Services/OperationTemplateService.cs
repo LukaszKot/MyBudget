@@ -16,7 +16,7 @@ namespace MyBudget.App.Services
 
         public async Task CreateOperationTemplateAsync(CreateOperationTemplateCommand command)
         {
-            var operationTemplate = new OperationTemplate(command.UserId, command.Name, command.DefaultValue,
+            var operationTemplate = new OperationTemplate(command.UserId!.Value, command.Name, command.DefaultValue,
                 command.ValueType, command.BudgetTemplateId, command.OperationCategoryId);
             await _operationTemplateRepository.Create(operationTemplate);
         }

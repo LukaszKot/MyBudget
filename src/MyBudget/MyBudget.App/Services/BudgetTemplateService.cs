@@ -20,15 +20,15 @@ namespace MyBudget.App.Services
 
         public async Task<BudgetTemplateCreatedEvent> CreateBudgetTemplateAsync(CreateBudgetTemplateCommand command)
         {
-            var budgetTemplate = new BudgetTemplate(command.UserId, command.Name);
+            var budgetTemplate = new BudgetTemplate(command.UserId!.Value, command.Name!);
             await _budgetTemplateRepository.Create(budgetTemplate);
             return new BudgetTemplateCreatedEvent(budgetTemplate.Id);
         }
 
         public async Task UpdateBudgetTemplateAsync(UpdateBudgetTemplateCommand command)
         {
-            var budgetTemplate = await _budgetTemplateRepository.Get(command.Id);
-            budgetTemplate.SetName(command.Name);
+            var budgetTemplate = await _budgetTemplateRepository.Get(command.Id!.Value);
+            budgetTemplate.SetName(command.Name!);
             await _budgetTemplateRepository.Update(budgetTemplate);
         }
 

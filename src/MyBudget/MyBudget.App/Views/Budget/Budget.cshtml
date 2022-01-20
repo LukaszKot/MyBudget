@@ -13,6 +13,7 @@
             <form asp-controller="Budget" asp-action="UpdateBudgetOperation">
                 <input type="hidden" name="BudgetId" value="@Model.Id"/>
                 <input type="hidden" name="Id" value="@operation.Id"/>
+                <input type="hidden" name="FormUrl" value="/budget/@Model.Id"/>
                 <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name"/>
                 <input type="text" name="DefaultValue" placeholder="Wartość" value="@operation.Value"/>
                 <select name="ValueType">
@@ -41,6 +42,7 @@
     <div class="element">
         <form asp-controller="Budget" asp-action="CreateBudgetOperation">
             <input type="hidden" name="BudgetId" value="@Model.Id"/>
+            <input type="hidden" name="FormUrl" value="/budget/@Model.Id"/>
             <input type="text" name="Name" placeholder="Nazwa"/>
             <input type="text" name="DefaultValue" placeholder="Wartość"/>
             <select name="ValueType">
@@ -51,6 +53,6 @@
             <input type="submit" value="Dodaj!"/>
         </form>
     </div>
-    <h1>Podsumowanie: @Model.Total</h1>
+    <h1>Podsumowanie: @Model.Total.ToString("F") PLN</h1>
     @Html.ActionLink("Powrót do strony głównej", "Index", "Home")
 </div>

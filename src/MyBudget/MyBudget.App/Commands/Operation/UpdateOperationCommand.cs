@@ -1,15 +1,17 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 using ValueType = MyBudget.App.Domain.ValueType;
 
 namespace MyBudget.App.Commands.Operation
 {
-    public record UpdateOperationCommand(
-        [Required] Guid Id, 
-        [Required] string Name, 
-        [Required] decimal DefaultValue, 
-        [Required] ValueType ValueType,
-        [Required] DateTime Date,
-        [Required] Guid BudgetId,
-        Guid? OperationCategoryId);
+    public class UpdateOperationCommand : CommandWithServiceValidation
+    {
+        public Guid? Id { get; set; }
+        public string? Name { get; set; }
+        public decimal? DefaultValue { get; set; }
+        public ValueType? ValueType { get; set; }
+        public DateTime? Date { get; set; }
+        public Guid? BudgetId { get; set; }
+        public Guid? OperationCategoryId { get; set; }
+    }
+        
 }

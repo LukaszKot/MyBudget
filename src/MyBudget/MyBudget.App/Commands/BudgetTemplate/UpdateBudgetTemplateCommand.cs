@@ -3,7 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyBudget.App.Commands.BudgetTemplate
 {
-    public record UpdateBudgetTemplateCommand(
-        [Required] Guid Id,
-        [Required] string Name);
+    public class UpdateBudgetTemplateCommand : CommandWithServiceValidation
+    {
+        public Guid? Id { get; set; }
+        public string? Name { get; set; }
+    }
+        
 }

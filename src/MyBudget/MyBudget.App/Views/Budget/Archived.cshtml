@@ -14,7 +14,7 @@
             <span>Nazwa: @operation.Name, Data: @operation.Date,
             @if (operation.ValueType.Equals(ValueType.Percent))
             {
-                @:Wartość rzeczywista: @operation.RealValue PLN, Wartość procentowa: @operation.Value, Typ wartości: %
+                @:Wartość rzeczywista: @operation.RealValue.ToString("F") PLN, Wartość procentowa: @operation.Value, Typ wartości: %
             }
             else
             {
@@ -26,6 +26,6 @@
     }
 
 
-    <h3>Wynik: @Model.Total PLN</h3>
+    <h3>Wynik: @Model.Total.ToString("F") PLN</h3>
     @Html.ActionLink("Powrót do strony głównej", "Index", "Home")
 </div>
