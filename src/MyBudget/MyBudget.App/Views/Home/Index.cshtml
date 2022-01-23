@@ -69,9 +69,22 @@
         {
             <div class="element">
                 <span>@operationTemplate.Name, @operationTemplate.CategoryName, @operationTemplate.DefaultValue, @operationTemplate.ValueType, @operationTemplate.BudgetTemplateId</span>
-                <div style="clear: both" />
+                <div style="clear: both" ></div>
             </div>
         }
+        <div class="element">
+            <h5>Stwórz nowy schemat operacji:</h5>
+            <form asp-controller="BudgetTemplate" asp-action="CreateOperationTemplate">
+                <input type="text" name="Name" placeholder="Nazwa"/>
+                <input type="number" name="DefaultValue" placeholder="Wartość" step="0.01"/>
+                <select name="ValueType">
+                    <option value="FixedAmount">PLN</option>
+                    <option value="Percent">%</option>
+                </select>
+                <input type="hidden" name="FormUrl" value="/"/>
+                <input type="submit" value="Dodaj!"/>
+            </form>
+        </div>
     </div>
     <div class="section">
         <h4>Kategorie operacji</h4>

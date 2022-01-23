@@ -55,7 +55,7 @@ namespace MyBudget.App.Controllers
         {
             command.UserId = UserId;
             await _operationTemplateService.CreateOperationTemplateAsync(command);
-            return Redirect($"{command.BudgetTemplateId}");
+            return Redirect(command.FormUrl);
         }
         
         [HttpPost("operation-template/edit")]
