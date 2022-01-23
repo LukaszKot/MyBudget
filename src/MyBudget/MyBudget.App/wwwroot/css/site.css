@@ -163,3 +163,8 @@ button:hover
   float: left;
   padding-top: 15px;
 }
+
+.category-component
+{
+  display: inline;
+}

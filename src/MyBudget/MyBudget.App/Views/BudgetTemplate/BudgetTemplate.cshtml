@@ -47,6 +47,10 @@
                 <option value="FixedAmount">PLN</option>
                 <option value="Percent">%</option>
             </select>
+            <div class="category-component">
+                <input type="hidden" name="OperationCategoryId" />
+                <input type="text" class="category-input" placeholder="Kategoria"/>
+            </div>
             <input type="hidden" name="BudgetTemplateId" value="@Model.Id" />
             <input type="hidden" name="FormUrl" value="/budget-template/@Model.Id"/>
             <input type="submit" value="Dodaj!"/>
