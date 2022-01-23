@@ -2,6 +2,7 @@
     ViewData["Title"] = "Strona główna";
     Layout = "_Layout";
 }
+@using ValueType = MyBudget.App.Domain.ValueType
 @model MyBudget.App.Queries.Budget.GetBudgetsQueryResponse;
 
 <div>
@@ -68,8 +69,26 @@
         @foreach (var operationTemplate in Model.OperationTemplates)
         {
             <div class="element">
-                <span>@operationTemplate.Name, @operationTemplate.CategoryName, @operationTemplate.DefaultValue, @operationTemplate.ValueType, @operationTemplate.BudgetTemplateId</span>
-                <div style="clear: both" ></div>
+                <form asp-controller="BudgetTemplate" asp-action="UpdateOperationTemplate">
+                    <input type="hidden" name="Id" value="@operationTemplate.Id" />
+                    <input type="hidden" name="FormUrl" value="/"/>
+                    <input type="text" name="Name" placeholder="Nazwa" value="@operationTemplate.Name" />
+                    <input type="text" name="DefaultValue" placeholder="Domyślna wartość" value="@operationTemplate.DefaultValue" />
+                    <select name="ValueType">
+                        @if(operationTemplate.ValueType == ValueType.FixedAmount)
+                        {
+                            <option value="FixedAmount" selected>PLN</option>
+                            <option value="Percent">%</option>
+                        }
+                        else
+                        {
+                            <option value="FixedAmount" >PLN</option>
+                            <option value="Percent" selected>%</option>
+                        }
+                    </select>
+                    <input type="submit" value="Edytuj!"/>
+                </form>
+                <div style="clear: both"></div>
             </div>
         }
         <div class="element">
