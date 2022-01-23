@@ -42,6 +42,7 @@ namespace MyBudget.App
             services.AddScoped<IOperationTemplateService, OperationTemplateService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashingService, HashingService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IPasswordPolicyEnforcer, PasswordPolicyEnforcer>();
             services.AddControllersWithViews(x =>
             {

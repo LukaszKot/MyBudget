@@ -21,5 +21,11 @@ namespace MyBudget.App.Repositories
                 .Where(x => x.UserId == userId)
                 .ToListAsync();
         }
+
+        public async Task Create(OperationCategory operationCategory)
+        {
+            await _dbContext.OperationCategories.AddAsync(operationCategory);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

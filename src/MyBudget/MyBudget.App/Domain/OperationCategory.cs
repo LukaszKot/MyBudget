@@ -18,13 +18,14 @@ namespace MyBudget.App.Domain
             
         }
 
-        public OperationCategory(string name)
+        public OperationCategory(string? name, Guid? userId)
         {
             Id = Guid.NewGuid();
             SetName(name);
+            UserId = userId!.Value;
         }
 
-        public void SetName(string name)
+        public void SetName(string? name)
         {
             if (!RegexConsts.ObjectName.IsMatch(name))
             {

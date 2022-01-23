@@ -114,8 +114,18 @@
         <h4>Kategorie operacji</h4>
         @foreach (var categories in Model.Categories)
         {
-            <div class="element">@categories.Name</div>
+            <div class="element">
+                @categories.Name
+            </div>
         }
+        <div class="element">
+            <h5>Dodaj kategorie:</h5>
+            <form asp-controller="Category" asp-action="CreateCategory">
+                <input type="text" name="Name" placeholder="Nazwa"/>
+                <input type="hidden" name="FormUrl" value="/"/>
+                <input type="submit" value="Dodaj!"/>
+            </form>
+        </div>
     </div>
     @Html.ActionLink("Wyloguj się!", "Logout", "User")
 </div>
