@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using MyBudget.App.Exceptions;
@@ -12,6 +13,7 @@ namespace MyBudget.App.Domain
         public string Hash { get; set; }
         public IEnumerable<BudgetTemplate> BudgetTemplates { get; set; }
         public IEnumerable<OperationTemplate> OperationTemplates { get; set; }
+        public IEnumerable<OperationCategory> OperationCategories { get; set; }
         
         // for serialization
         private User()
