@@ -9,5 +9,7 @@ namespace MyBudget.App.Repositories
     {
         Task<IEnumerable<OperationCategory>> GetAll(Guid userId);
         Task Create(OperationCategory operationCategory);
+        Task<OperationCategory> Get(Guid id);
+        Task Update(OperationCategory operationCategory);
     }
 }

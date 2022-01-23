@@ -6,5 +6,6 @@ namespace MyBudget.App.Services
     public interface ICategoryService
     {
         Task CreateCategory(CreateCategoryCommand command);
+        Task UpdateCategory(UpdateCategoryNameCommand command);
     }
 }

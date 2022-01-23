@@ -27,5 +27,17 @@ namespace MyBudget.App.Repositories
             await _dbContext.OperationCategories.AddAsync(operationCategory);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<OperationCategory> Get(Guid id)
+        {
+            return await _dbContext.OperationCategories
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task Update(OperationCategory operationCategory)
+        {
+            _dbContext.OperationCategories.Update(operationCategory);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

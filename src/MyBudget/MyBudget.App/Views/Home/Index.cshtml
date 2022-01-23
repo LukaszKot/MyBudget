@@ -115,7 +115,12 @@
         @foreach (var categories in Model.Categories)
         {
             <div class="element">
-                @categories.Name
+                <form asp-controller="Category" asp-action="UpdateCategory">
+                    <input type="hidden" name="Id" value="@categories.Id" />
+                    <input type="hidden" name="FormUrl" value="/"/>
+                    <input type="text" name="Name" placeholder="Nazwa" value="@categories.Name" />
+                    <input type="submit" value="Edytuj!"/>
+                </form>
             </div>
         }
         <div class="element">

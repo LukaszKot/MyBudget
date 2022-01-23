@@ -18,5 +18,12 @@ namespace MyBudget.App.Services
             var category = new OperationCategory(command.Name, command.UserId);
             await _categoryRepository.Create(category);
         }
+
+        public async Task UpdateCategory(UpdateCategoryNameCommand command)
+        {
+            var category = await _categoryRepository.Get(command.Id);
+            category.SetName(command.Name);
+            await _categoryRepository.Update(category);
+        }
     }
 }

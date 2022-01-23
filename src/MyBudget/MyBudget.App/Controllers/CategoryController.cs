@@ -24,5 +24,12 @@ namespace MyBudget.App.Controllers
             await _categoryService.CreateCategory(command);
             return Redirect(command.FormUrl);
         }
+        
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryNameCommand command)
+        {
+            await _categoryService.UpdateCategory(command);
+            return Redirect(command.FormUrl);
+        }
     }
 }
