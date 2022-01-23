@@ -11,5 +11,6 @@ namespace MyBudget.App.Repositories
         Task Create(OperationCategory operationCategory);
         Task<OperationCategory> Get(Guid id);
         Task Update(OperationCategory operationCategory);
+        Task Delete(OperationCategory operationCategory);
     }
 }

@@ -25,5 +25,11 @@ namespace MyBudget.App.Services
             category.SetName(command.Name);
             await _categoryRepository.Update(category);
         }
+
+        public async Task DeleteCategory(DeleteCategoryCommand command)
+        {
+            var category = await _categoryRepository.Get(command.Id);
+            await _categoryRepository.Delete(category);
+        }
     }
 }

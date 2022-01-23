@@ -39,5 +39,11 @@ namespace MyBudget.App.Repositories
             _dbContext.OperationCategories.Update(operationCategory);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task Delete(OperationCategory operationCategory)
+        {
+            _dbContext.OperationCategories.Remove(operationCategory);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

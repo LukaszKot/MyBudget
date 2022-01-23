@@ -7,5 +7,6 @@ namespace MyBudget.App.Services
     {
         Task CreateCategory(CreateCategoryCommand command);
         Task UpdateCategory(UpdateCategoryNameCommand command);
+        Task DeleteCategory(DeleteCategoryCommand command);
     }
 }

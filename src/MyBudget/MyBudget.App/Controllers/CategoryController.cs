@@ -31,5 +31,12 @@ namespace MyBudget.App.Controllers
             await _categoryService.UpdateCategory(command);
             return Redirect(command.FormUrl);
         }
+        
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteCategory(DeleteCategoryCommand command)
+        {
+            await _categoryService.DeleteCategory(command);
+            return Redirect(command.FormUrl);
+        }
     }
 }

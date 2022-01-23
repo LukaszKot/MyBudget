@@ -121,6 +121,11 @@
                     <input type="text" name="Name" placeholder="Nazwa" value="@categories.Name" />
                     <input type="submit" value="Edytuj!"/>
                 </form>
+                <form asp-controller="Category" asp-action="DeleteCategory">
+                    <input type="hidden" name="Id" value="@categories.Id" />
+                    <input type="hidden" name="FormUrl" value="/"/>
+                    <input type="submit" value="Usuń!"/>
+                </form>
             </div>
         }
         <div class="element">
