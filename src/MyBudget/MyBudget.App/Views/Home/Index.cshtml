@@ -88,6 +88,11 @@
                     </select>
                     <input type="submit" value="Edytuj!"/>
                 </form>
+                <form asp-controller="BudgetTemplate" asp-action="DeleteOperationTemplate">
+                    <input type="hidden" name="Id" value="@operationTemplate.Id" />
+                    <input type="hidden" name="FormUrl" value="/"/>
+                    <input type="submit" value="Usuń!" />
+                </form>
                 <div style="clear: both"></div>
             </div>
         }

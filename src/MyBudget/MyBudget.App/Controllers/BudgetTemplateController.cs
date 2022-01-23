@@ -69,7 +69,7 @@ namespace MyBudget.App.Controllers
         public async Task<IActionResult> DeleteOperationTemplate(DeleteOperationTemplateCommand command)
         {
             await _operationTemplateService.DeleteOperationTemplateAsync(command);
-            return Redirect($"../{command.BudgetTemplateId}");
+            return Redirect(command.FormUrl);
         }
     }
 }
