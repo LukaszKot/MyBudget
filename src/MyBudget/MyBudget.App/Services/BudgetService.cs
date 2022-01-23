@@ -32,7 +32,7 @@ namespace MyBudget.App.Services
         {
             var budgetsTemplatesTask = _budgetRepository.GetAllUserBudgetsWithRelatedTables(userId);
             var operationTemplatesTask = _operationTemplateRepository.GetOperationTemplatesAsync(userId);
-            var categoriesTask = _categoryRepository.GetAll();
+            var categoriesTask = _categoryRepository.GetAll(userId);
 
             var budgetsTemplates = await budgetsTemplatesTask;
 

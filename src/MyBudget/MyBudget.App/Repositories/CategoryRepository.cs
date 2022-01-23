@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyBudget.App.Database;
@@ -14,9 +15,11 @@ namespace MyBudget.App.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<OperationCategory>> GetAll()
+        public async Task<IEnumerable<OperationCategory>> GetAll(Guid userId)
         {
-            return await _dbContext.OperationCategories.ToListAsync();
+            return await _dbContext.OperationCategories
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
         }
     }
 }
