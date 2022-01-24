@@ -7,7 +7,7 @@ namespace MyBudget.App.Repositories
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<OperationCategory>> GetAll(Guid userId);
+        Task<IEnumerable<OperationCategory>> GetAll(Guid userId, string searchText="");
         Task Create(OperationCategory operationCategory);
         Task<OperationCategory> Get(Guid id);
         Task Update(OperationCategory operationCategory);

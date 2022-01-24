@@ -15,11 +15,16 @@ namespace MyBudget.App.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<OperationCategory>> GetAll(Guid userId)
+        public async Task<IEnumerable<OperationCategory>> GetAll(Guid userId, string searchText="")
         {
-            return await _dbContext.OperationCategories
-                .Where(x => x.UserId == userId)
-                .ToListAsync();
+            var query = _dbContext.OperationCategories
+                .Where(x => x.UserId == userId);
+            if (searchText != string.Empty)
+            {
+                query = query.Where(x => x.Name.Contains(searchText));
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task Create(OperationCategory operationCategory)
