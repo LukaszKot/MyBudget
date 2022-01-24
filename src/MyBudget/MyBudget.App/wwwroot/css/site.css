@@ -167,4 +167,32 @@ button:hover
 .category-component
 {
   display: inline;
+  position: relative;
 }
+
+.category-list
+{
+  position: absolute;
+  left: 0;
+  top: 20px;
+  margin: 5px;
+}
+
+.category-list-element
+{
+  padding: 5px;
+  background-color: #F49F05;
+  width: 275px;
+  margin: 5px;
+  cursor: pointer;
+  color: #36688D;
+  font-weight: 700;
+}
+
+.category-list-element:hover
+{
+  background-color: #F18904;
+}
+
+
+
