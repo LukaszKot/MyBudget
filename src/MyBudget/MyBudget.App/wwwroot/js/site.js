@@ -13,6 +13,24 @@
                 }
             })
         })
+    },
+    createCategory: (categoryName) =>{
+        return new Promise((resolve, reject)=>{
+            $.ajax({
+                url: "/api/selects/categories/",
+                method: "POST",
+                data: JSON.stringify({ "name": categoryName }),
+                contentType: 'application/json',
+                success: function (data)
+                {
+                    resolve(data.id)
+                },
+                error: function ()
+                {
+                    reject()
+                }
+            })
+        })
     }
 }
 
@@ -56,7 +74,15 @@ class SelectSearch
     
     async addClick()
     {
-        console.log("add: ", this.state.choosen.name)
+        let newCategoryId = await restClient.createCategory(this.state.choosen.name);
+        this.setState({
+            choosen: {
+                id: newCategoryId,
+                name: this.state.choosen.name,
+                isNew: false
+            },
+            searchResult: []
+        })
     }
     
     update()
@@ -65,6 +91,7 @@ class SelectSearch
         this.domElement.unbind()
         this.domElement.on("input",(e)=>this.onInput(e))
         $(this.domElement.find(".category-input")[0]).val(this.state.choosen.name)
+        $(this.domElement.find("input[name=OperationCategoryId]")[0]).val(this.state.choosen.id)
         let categoriesList = $("<div></div>").addClass("category-list");
         if(this.state.searchResult.length > 0)
         {

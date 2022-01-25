@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyBudget.App.Commands.Categories;
 using MyBudget.App.Queries.Categories;
 using MyBudget.App.Services;
 
@@ -23,6 +24,14 @@ namespace MyBudget.App.Controllers
             query.UserId = UserId;
             var categories = await _categoryService.GetUserCategories(query);
             return Ok(categories);
+        }
+
+        [HttpPost("categories")]
+        public async Task<IActionResult> AddCategories([FromBody] CreateCategoryCommand command)
+        {
+            command.UserId = UserId;
+            var categoryId = await _categoryService.CreateCategory(command);
+            return Ok(new { Id = categoryId });
         }
     }
 }

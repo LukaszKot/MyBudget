@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using MyBudget.App.Commands.Categories;
@@ -16,10 +17,11 @@ namespace MyBudget.App.Services
             _categoryRepository = categoryRepository;
         }
         
-        public async Task CreateCategory(CreateCategoryCommand command)
+        public async Task<Guid> CreateCategory(CreateCategoryCommand command)
         {
             var category = new OperationCategory(command.Name, command.UserId);
             await _categoryRepository.Create(category);
+            return category.Id;
         }
 
         public async Task UpdateCategory(UpdateCategoryNameCommand command)
