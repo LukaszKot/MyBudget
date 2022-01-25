@@ -21,7 +21,8 @@ class SelectSearch
     state = {
         choosen: {
             id: "",
-            name: ""
+            name: "",
+            isNew: false
         },
         searchResult: []
     }
@@ -42,13 +43,20 @@ class SelectSearch
     {
         let categories = await restClient.getCategories(e.target.value)
             .catch(()=>{})
+        let existingCategory = categories != null && categories.length >0 ? categories.filter(x => x.name === e.target.value)[0] : null
         this.setState({
             choosen: {
-                id: "",
-                name: e.target.value
+                id: existingCategory != null ? existingCategory.id : "",
+                name: e.target.value,
+                isNew: existingCategory == null && e.target.value !== ""
             },
             searchResult: categories == null ? [] : categories
         })
+    }
+    
+    async addClick()
+    {
+        console.log("add: ", this.state.choosen.name)
     }
     
     update()
@@ -56,6 +64,7 @@ class SelectSearch
         $(this.domElement.find(".category-list")).remove()
         this.domElement.unbind()
         this.domElement.on("input",(e)=>this.onInput(e))
+        $(this.domElement.find(".category-input")[0]).val(this.state.choosen.name)
         let categoriesList = $("<div></div>").addClass("category-list");
         if(this.state.searchResult.length > 0)
         {
@@ -64,13 +73,25 @@ class SelectSearch
                     .addClass("category-list-element")
                     .text(x.name)
                     .click(()=>{
-                        this.setState({ choosen: x, searchResult: []})
+                        this.setState({ choosen: { id: x.id, name: x.name, isNew: false }, searchResult: []})
                     })
 
             )
             categoriesList.append(categoriesElements);
         }
         this.domElement.append(categoriesList)
+        
+        $(this.domElement.find(".add-category")).remove()
+        if(this.state.choosen.isNew)
+        {
+            let categoryButton = $("<div></div>")
+                .addClass("add-category")
+                .text("+")
+                .on("click", ()=>{
+                    this.addClick()
+                });
+            this.domElement.append(categoryButton);
+        }
     }
 }
 let components = []
