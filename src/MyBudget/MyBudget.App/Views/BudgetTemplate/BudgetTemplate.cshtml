@@ -28,6 +28,10 @@
                         <option value="Percent" selected>%</option>
                     }
                 </select>
+                <div class="category-component">
+                    <input type="hidden" name="OperationCategoryId" value="@operation.OperationCategoryId" />
+                    <input type="text" class="category-input" placeholder="Kategoria" value="@operation.CategoryName" />
+                </div>
                 <input type="submit" value="Edytuj!"/>
             </form>
             

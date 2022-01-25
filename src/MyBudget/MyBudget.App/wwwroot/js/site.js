@@ -47,6 +47,8 @@ class SelectSearch
     
     constructor(domElement) {
         this.domElement=$(domElement)
+        this.state.choosen.name = $(this.domElement.find(".category-input")[0]).val()
+        this.state.choosen.id = $(this.domElement.find("input[name=OperationCategoryId]")[0]).val()
         this.update()
     }
     
