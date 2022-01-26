@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,13 @@ namespace MyBudget.App.Repositories
         public BudgetTemplateRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<BudgetTemplate>> GetBudgetTemplates(Guid userId)
+        {
+            return await _dbContext.BudgetTemplates
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
         }
 
         public async Task<BudgetTemplate> GetBudgetTemplateWithOperationTemplates(Guid budgetId)
