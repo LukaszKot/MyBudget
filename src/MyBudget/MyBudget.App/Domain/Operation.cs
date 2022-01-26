@@ -43,7 +43,6 @@ namespace MyBudget.App.Domain
             ValueType = operationTemplate.ValueType;
             Date = DateTime.UtcNow;
             OperationCategoryId = operationTemplate.OperationCategoryId;
-            OperationCategory = operationTemplate.OperationCategory;
         }
         
         public void SetName(string? name)
