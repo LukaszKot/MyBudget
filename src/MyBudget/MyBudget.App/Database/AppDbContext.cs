@@ -39,6 +39,16 @@ namespace MyBudget.App.Database
                 .WithOne(x => x.User)
                 .OnDelete(DeleteBehavior.NoAction);
             
+            modelBuilder.Entity<OperationCategory>()
+                .HasMany(x => x.Operations)
+                .WithOne(x => x.OperationCategory)
+                .OnDelete(DeleteBehavior.SetNull);
+            
+            modelBuilder.Entity<OperationCategory>()
+                .HasMany(x => x.OperationTemplates)
+                .WithOne(x => x.OperationCategory)
+                .OnDelete(DeleteBehavior.SetNull);
+            
             modelBuilder.Entity<BudgetTemplate>()
                 .Property(x => x.Name)
                 .HasMaxLength(50);
