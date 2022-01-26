@@ -29,6 +29,10 @@
                     }
                 </select>
                 <input type="text" name="Date" placeholder="Data" value="@operation.Date"/>
+                <div class="category-component">
+                    <input type="hidden" name="OperationCategoryId" value="@operation.OperationCategoryId" />
+                    <input type="text" class="category-input" placeholder="Kategoria" value="@operation.CategoryName" />
+                </div>
                 <input type="submit" value="Edytuj!"/>
             </form>
             <form asp-controller="Budget" asp-action="DeleteBudgetOperation">
@@ -50,6 +54,10 @@
                 <option value="Percent">%</option>
             </select>
             <input type="date" name="Date" placeholder="Data"/>
+            <div class="category-component">
+                <input type="hidden" name="OperationCategoryId"  />
+                <input type="text" class="category-input" placeholder="Kategoria" />
+            </div>
             <input type="submit" value="Dodaj!"/>
         </form>
     </div>
