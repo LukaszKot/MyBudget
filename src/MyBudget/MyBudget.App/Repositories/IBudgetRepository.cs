@@ -7,7 +7,7 @@ namespace MyBudget.App.Repositories
 {
     public interface IBudgetRepository
     {
-        Task<IEnumerable<BudgetTemplate>> GetAllUserBudgetsWithRelatedTables(Guid userId);
+        Task<IEnumerable<Budget>> GetBudgets(Guid userId);
         Task<Budget> GetBudgetOperations(Guid budgetId);
         Task<Budget> GetBudget(Guid budgetId);
         Task Update(Budget budget);

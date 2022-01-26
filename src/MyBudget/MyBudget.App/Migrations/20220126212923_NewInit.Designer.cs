@@ -10,8 +10,8 @@ using MyBudget.App.Database;
 namespace MyBudget.App.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220117185204_RemovedNullabelFromName")]
-    partial class RemovedNullabelFromName
+    [Migration("20220126212923_NewInit")]
+    partial class NewInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace MyBudget.App.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BudgetTemplateId")
+                    b.Property<Guid?>("BudgetTemplateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("BudgetType")
@@ -36,12 +36,21 @@ namespace MyBudget.App.Migrations
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("To")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BudgetTemplateId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Budgets");
                 });
@@ -101,6 +110,8 @@ namespace MyBudget.App.Migrations
 
                     b.HasIndex("BudgetId");
 
+                    b.HasIndex("OperationCategoryId");
+
                     b.HasIndex("OperationTemplateId");
 
                     b.ToTable("Operations");
@@ -117,7 +128,12 @@ namespace MyBudget.App.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OperationCategories");
                 });
@@ -183,36 +199,67 @@ namespace MyBudget.App.Migrations
 
             modelBuilder.Entity("MyBudget.App.Domain.Budget", b =>
                 {
-                    b.HasOne("MyBudget.App.Domain.BudgetTemplate", null)
+                    b.HasOne("MyBudget.App.Domain.BudgetTemplate", "BudgetTemplate")
                         .WithMany("Budgets")
                         .HasForeignKey("BudgetTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("MyBudget.App.Domain.User", "User")
+                        .WithMany("Budgets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("BudgetTemplate");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyBudget.App.Domain.BudgetTemplate", b =>
                 {
-                    b.HasOne("MyBudget.App.Domain.User", null)
+                    b.HasOne("MyBudget.App.Domain.User", "User")
                         .WithMany("BudgetTemplates")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyBudget.App.Domain.Operation", b =>
                 {
-                    b.HasOne("MyBudget.App.Domain.Budget", null)
+                    b.HasOne("MyBudget.App.Domain.Budget", "Budget")
                         .WithMany("Operations")
                         .HasForeignKey("BudgetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MyBudget.App.Domain.OperationCategory", "OperationCategory")
+                        .WithMany("Operations")
+                        .HasForeignKey("OperationCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("MyBudget.App.Domain.OperationTemplate", "OperationTemplate")
                         .WithMany("Operations")
                         .HasForeignKey("OperationTemplateId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.Navigation("Budget");
+
+                    b.Navigation("OperationCategory");
+
                     b.Navigation("OperationTemplate");
+                });
+
+            modelBuilder.Entity("MyBudget.App.Domain.OperationCategory", b =>
+                {
+                    b.HasOne("MyBudget.App.Domain.User", "User")
+                        .WithMany("OperationCategories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyBudget.App.Domain.OperationTemplate", b =>
@@ -220,19 +267,22 @@ namespace MyBudget.App.Migrations
                     b.HasOne("MyBudget.App.Domain.BudgetTemplate", "BudgetTemplate")
                         .WithMany("OperationTemplates")
                         .HasForeignKey("BudgetTemplateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("MyBudget.App.Domain.OperationCategory", null)
-                        .WithMany("Operations")
-                        .HasForeignKey("OperationCategoryId");
+                    b.HasOne("MyBudget.App.Domain.OperationCategory", "OperationCategory")
+                        .WithMany("OperationTemplates")
+                        .HasForeignKey("OperationCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("MyBudget.App.Domain.User", "User")
                         .WithMany("OperationTemplates")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BudgetTemplate");
+
+                    b.Navigation("OperationCategory");
 
                     b.Navigation("User");
                 });
@@ -252,6 +302,8 @@ namespace MyBudget.App.Migrations
             modelBuilder.Entity("MyBudget.App.Domain.OperationCategory", b =>
                 {
                     b.Navigation("Operations");
+
+                    b.Navigation("OperationTemplates");
                 });
 
             modelBuilder.Entity("MyBudget.App.Domain.OperationTemplate", b =>
@@ -261,7 +313,11 @@ namespace MyBudget.App.Migrations
 
             modelBuilder.Entity("MyBudget.App.Domain.User", b =>
                 {
+                    b.Navigation("Budgets");
+
                     b.Navigation("BudgetTemplates");
+
+                    b.Navigation("OperationCategories");
 
                     b.Navigation("OperationTemplates");
                 });

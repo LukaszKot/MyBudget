@@ -7,12 +7,15 @@ namespace MyBudget.App.Domain
     public class Budget
     {
         public Guid Id { get; init; }
-        public BudgetTemplate BudgetTemplate { get; set; }
-        public Guid BudgetTemplateId { get; init; }
+        public BudgetTemplate? BudgetTemplate { get; set; }
+        public Guid? BudgetTemplateId { get; init; }
         public BudgetType BudgetType { get; set; }
         public DateTime From { get; init; }
         public DateTime? To { get; private set; }
         public ICollection<Operation> Operations { get; set; }
+        public string Name { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
 
         // for serialization
         private Budget()
@@ -24,10 +27,12 @@ namespace MyBudget.App.Domain
         {
             var newId = Guid.NewGuid();
             Id = newId;
+            Name = budgetTemplate.Name;
             BudgetTemplateId = budgetTemplate.Id;
             BudgetType = BudgetType.Active;
             From = DateTime.UtcNow;
             Operations = budgetTemplate.OperationTemplates.Select(x => new Operation(newId, x)).ToList();
+            UserId = budgetTemplate.UserId;
         }
 
         public void Archive()

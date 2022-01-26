@@ -20,11 +20,19 @@ namespace MyBudget.App.Database
             modelBuilder.Entity<OperationTemplate>()
                 .HasOne(x => x.BudgetTemplate)
                 .WithMany(x => x.OperationTemplates)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Operation>()
                 .HasOne(x => x.OperationTemplate)
                 .WithMany(x => x.Operations)
                 .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<BudgetTemplate>()
+                .HasMany(x => x.Budgets)
+                .WithOne(x => x.BudgetTemplate)
+                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Budget>()
+                .HasMany(x => x.Operations)
+                .WithOne(x => x.Budget)
+                .OnDelete(DeleteBehavior.Cascade);
             
             modelBuilder.Entity<User>()
                 .HasMany(x=> x.OperationCategories)
@@ -36,6 +44,10 @@ namespace MyBudget.App.Database
                 .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<User>()
                 .HasMany(x => x.OperationTemplates)
+                .WithOne(x => x.User)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Budgets)
                 .WithOne(x => x.User)
                 .OnDelete(DeleteBehavior.NoAction);
             

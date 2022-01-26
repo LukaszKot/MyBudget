@@ -14,6 +14,7 @@ namespace MyBudget.App.Domain
         public IEnumerable<BudgetTemplate> BudgetTemplates { get; set; }
         public IEnumerable<OperationTemplate> OperationTemplates { get; set; }
         public IEnumerable<OperationCategory> OperationCategories { get; set; }
+        public IEnumerable<Budget> Budgets { get; set; }
         
         // for serialization
         private User()

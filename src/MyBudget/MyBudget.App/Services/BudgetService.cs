@@ -30,26 +30,26 @@ namespace MyBudget.App.Services
 
         public async Task<GetBudgetsQueryResponse> GetBudgetsAsync(Guid userId)
         {
-            var budgetsTemplatesTask = _budgetRepository.GetAllUserBudgetsWithRelatedTables(userId);
+            var budgetTemplatesTask = _budgetTemplateRepository.GetBudgetTemplates(userId);
+            var userBudgetsTask = _budgetRepository.GetBudgets(userId);
             var operationTemplatesTask = _operationTemplateRepository.GetOperationTemplatesAsync(userId);
             var categoriesTask = _categoryRepository.GetAll(userId);
 
-            var budgetsTemplates = await budgetsTemplatesTask;
-
-            var budgetTemplates = budgetsTemplates.ToList();
-            var budgetTemplatesDtos = budgetTemplates
+            var budgetTemplates = await budgetTemplatesTask;
+            var userBudgetsList = budgetTemplates.ToList();
+            var budgetTemplatesDtos = userBudgetsList
                 .Select(x => new BudgetTemplateDto(x.Id, x.Name))
                 .OrderBy(x => x.Name);
-            var activeBudget = budgetTemplates
-                .SelectMany(x => x.Budgets)
+            
+            var userBudgets = (await userBudgetsTask).ToList();
+            var activeBudget = userBudgets
                 .Where(x => x.BudgetType == BudgetType.Active)
-                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To))
+                .Select(x => new BudgetDto(x.Id, x.Name, x.From, x.To))
                 .OrderByDescending(x=>x.From);
             
-            var archivedBudget = budgetTemplates
-                .SelectMany(x => x.Budgets)
+            var archivedBudget = userBudgets
                 .Where(x => x.BudgetType == BudgetType.Historical)
-                .Select(x => new BudgetDto(x.Id, x.BudgetTemplate.Name, x.From, x.To))
+                .Select(x => new BudgetDto(x.Id, x.Name, x.From, x.To))
                 .OrderByDescending(x => x.To);
             
             var operationTemplates = await operationTemplatesTask;
@@ -67,7 +67,7 @@ namespace MyBudget.App.Services
         {
             var queryResult = await _budgetRepository.GetBudgetOperations(query.Id);
             return new GetBudgetOperationsQueryResponse(queryResult.Id,
-                queryResult.BudgetTemplate.Name,
+                queryResult.Name,
                 queryResult.From,
                 queryResult.GetTotal(),
                 queryResult.Operations
@@ -106,7 +106,7 @@ namespace MyBudget.App.Services
 
             return new GetArchivedBudgetOperationsQueryResponse(
                 archivedBudget.Id,
-                archivedBudget.BudgetTemplate.Name,
+                archivedBudget.Name,
                 archivedBudget.From,
                 archivedBudget.To!.Value,
                 archivedBudget.GetTotal(),

@@ -16,11 +16,10 @@ namespace MyBudget.App.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<BudgetTemplate>> GetAllUserBudgetsWithRelatedTables(Guid userId)
+        public async Task<IEnumerable<Budget>> GetBudgets(Guid userId)
         {
-            return await _dbContext.BudgetTemplates
+            return await _dbContext.Budgets
                 .Where(x => x.UserId == userId)
-                .Include(x => x.Budgets)
                 .ToListAsync();
         }
 
