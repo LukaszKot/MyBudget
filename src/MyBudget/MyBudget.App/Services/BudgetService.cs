@@ -118,7 +118,7 @@ namespace MyBudget.App.Services
                         x.OperationTemplateId,
                         x.OperationCategoryId,
                         x.OperationCategory?.Name,
-                        x.ValueType == ValueType.Percent ? archivedBudget.GetIncome()*x.Value : x.Value)),
+                        x.ValueType == ValueType.Percent ? archivedBudget.GetIncome()*x.Value/100 : x.Value)),
                 new StatisticsDto(new List<StatisticDto>()));
         }
     }
