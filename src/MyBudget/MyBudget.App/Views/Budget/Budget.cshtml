@@ -48,7 +48,10 @@
         <form asp-controller="Budget" asp-action="CreateBudgetOperation">
             <input type="hidden" name="BudgetId" value="@Model.Id"/>
             <input type="hidden" name="FormUrl" value="/budget/@Model.Id"/>
-            <input type="text" name="Name" placeholder="Nazwa"/>
+            <div class="existing-template-component">
+                <input type="hidden" name="BudgetId" value="@Model.Id"/>
+                <input type="text" class="existing-template-input" placeholder="Nazwa" name="Name"/>
+            </div>
             <input type="text" name="DefaultValue" placeholder="Wartość"/>
             <select name="ValueType">
                 <option value="FixedAmount">PLN</option>
@@ -56,8 +59,8 @@
             </select>
             <input type="date" name="Date" placeholder="Data"/>
             <div class="category-component">
-                <input type="hidden" name="OperationCategoryId"  />
-                <input type="text" class="category-input" placeholder="Kategoria" />
+                <input type="hidden" name="OperationCategoryId"/>
+                <input type="text" class="category-input" placeholder="Kategoria"/>
             </div>
             <input type="submit" value="Dodaj!"/>
         </form>

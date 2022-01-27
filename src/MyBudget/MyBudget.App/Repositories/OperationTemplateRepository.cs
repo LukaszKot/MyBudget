@@ -16,12 +16,16 @@ namespace MyBudget.App.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId)
+        public async Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId, string? searchText=null)
         {
-            return await _dbContext.OperationTemplates
+            var query = _dbContext.OperationTemplates
                 .Include(x => x.OperationCategory)
-                .Where(x => x.UserId == userId)
-                .OrderBy(x => x.Name)
+                .Where(x => x.UserId == userId);
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                query = query.Where(x => x.Name.Contains(searchText));
+            }
+            return await query.OrderBy(x => x.Name)
                 .ToListAsync();
         }
 
