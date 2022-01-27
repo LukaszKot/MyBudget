@@ -86,6 +86,10 @@
                             <option value="Percent" selected>%</option>
                         }
                     </select>
+                    <div class="category-component">
+                        <input type="hidden" name="OperationCategoryId" value="@operationTemplate.OperationCategoryId" />
+                        <input type="text" class="category-input" placeholder="Kategoria" value="@operationTemplate.CategoryName" />
+                    </div>
                     <input type="submit" value="Edytuj!"/>
                 </form>
                 <form asp-controller="BudgetTemplate" asp-action="DeleteOperationTemplate">
@@ -106,6 +110,10 @@
                     <option value="Percent">%</option>
                 </select>
                 <input type="hidden" name="FormUrl" value="/"/>
+                <div class="category-component">
+                    <input type="hidden" name="OperationCategoryId"  />
+                    <input type="text" class="category-input" placeholder="Kategoria" />
+                </div>
                 <input type="submit" value="Dodaj!"/>
             </form>
         </div>

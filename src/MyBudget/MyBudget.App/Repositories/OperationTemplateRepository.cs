@@ -19,6 +19,7 @@ namespace MyBudget.App.Repositories
         public async Task<IEnumerable<OperationTemplate>> GetOperationTemplatesAsync(Guid userId)
         {
             return await _dbContext.OperationTemplates
+                .Include(x => x.OperationCategory)
                 .Where(x => x.UserId == userId)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
