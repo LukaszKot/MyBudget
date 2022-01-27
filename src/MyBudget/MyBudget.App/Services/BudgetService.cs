@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyBudget.App.Commands.Budget;
@@ -71,6 +70,7 @@ namespace MyBudget.App.Services
                 queryResult.From,
                 queryResult.GetTotal(),
                 queryResult.Operations
+                    .OrderBy(x => x.Date)
                     .Select(x => new OperationDto(
                         x.Id, 
                         x.Name, 
@@ -119,7 +119,13 @@ namespace MyBudget.App.Services
                         x.OperationCategoryId,
                         x.OperationCategory?.Name,
                         x.ValueType == ValueType.Percent ? archivedBudget.GetIncome()*x.Value/100 : x.Value)),
-                new StatisticsDto(new List<StatisticDto>()));
+                new StatisticsDto(archivedBudget
+                    .Operations
+                    .GroupBy(x => new { x.OperationCategoryId, x.OperationCategory?.Name }, 
+                        x => x.ValueType == ValueType.Percent ? 
+                        archivedBudget.GetIncome() * x.Value / 100 : x.Value, 
+                        (x,y) => new StatisticDto(x.OperationCategoryId ?? Guid.Empty, x.Name ?? "Brak kategorii", y.Sum()))
+                    .OrderByDescending(x => x.AggregatedSum)));
         }
     }
 }

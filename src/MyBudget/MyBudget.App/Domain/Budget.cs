@@ -12,7 +12,7 @@ namespace MyBudget.App.Domain
         public BudgetType BudgetType { get; set; }
         public DateTime From { get; init; }
         public DateTime? To { get; private set; }
-        public ICollection<Operation> Operations { get; set; }
+        public IEnumerable<Operation> Operations { get; set; }
         public string Name { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }

@@ -6,7 +6,7 @@
     Layout = "_Layout";
 }
 <div class="section">
-    <h2>@Model.Name - Aktywny od: @Model.From</h2>
+    <h2>@Model.Name - Aktywny od: @Model.From.ToString("dd/MM/yyyy")</h2>
     @foreach (var operation in Model.Operations)
     {
         <div class="element">
@@ -15,6 +15,7 @@
                 <input type="hidden" name="Id" value="@operation.Id"/>
                 <input type="hidden" name="FormUrl" value="/budget/@Model.Id"/>
                 <input type="text" name="Name" placeholder="Nazwa" value="@operation.Name"/>
+                @operation.RealValue PLN
                 <input type="text" name="DefaultValue" placeholder="Wartość" value="@operation.Value"/>
                 <select name="ValueType">
                     @if(operation.ValueType == ValueType.FixedAmount)
@@ -28,7 +29,7 @@
                         <option value="Percent" selected>%</option>
                     }
                 </select>
-                <input type="text" name="Date" placeholder="Data" value="@operation.Date"/>
+                <input type="text" name="Date" placeholder="Data" value="@operation.Date.ToString("MM/dd/yyyy")"/>
                 <div class="category-component">
                     <input type="hidden" name="OperationCategoryId" value="@operation.OperationCategoryId" />
                     <input type="text" class="category-input" placeholder="Kategoria" value="@operation.CategoryName" />

@@ -20,6 +20,7 @@ namespace MyBudget.App.Repositories
         {
             return await _dbContext.OperationTemplates
                 .Where(x => x.UserId == userId)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
         }
 

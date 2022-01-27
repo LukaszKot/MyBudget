@@ -44,6 +44,7 @@ namespace MyBudget.App.Services
             return new(budgetTemplates.Id,
                 budgetTemplates.Name,
                 budgetTemplates.OperationTemplates
+                    .OrderByDescending(x => x.Name)
                     .Select(x => new OperationTemplateDto(x.Id,
                         x.Name,
                         x.DefaultValue,

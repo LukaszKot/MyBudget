@@ -24,7 +24,8 @@ namespace MyBudget.App.Repositories
                 query = query.Where(x => x.Name.Contains(searchText));
             }
 
-            return await query.ToListAsync();
+            return await query.OrderBy(x => x.Name)
+                .ToListAsync();
         }
 
         public async Task Create(OperationCategory operationCategory)
