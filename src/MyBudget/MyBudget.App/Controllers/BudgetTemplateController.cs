@@ -61,6 +61,7 @@ namespace MyBudget.App.Controllers
         [HttpPost("operation-template/edit")]
         public async Task<IActionResult> UpdateOperationTemplate(UpdateOperationTemplateCommand command)
         {
+            command.UserId = UserId;
             await _operationTemplateService.UpdateOperationTemplateAsync(command);
             return Redirect(command.FormUrl);
         }
@@ -68,6 +69,7 @@ namespace MyBudget.App.Controllers
         [HttpPost("operation-template/delete")]
         public async Task<IActionResult> DeleteOperationTemplate(DeleteOperationTemplateCommand command)
         {
+            command.UserId = UserId;
             await _operationTemplateService.DeleteOperationTemplateAsync(command);
             return Redirect(command.FormUrl);
         }

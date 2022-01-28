@@ -51,6 +51,7 @@ namespace MyBudget.App.Controllers
         [HttpPost("operation")]
         public async Task<IActionResult> AddOperationBasedOnOperationTemplate([FromBody] CreateOperationFromTemplateCommand command)
         {
+            command.UserId = UserId;
             await _operationService.CreateOperationFromTemplateAsync(command);
             return Ok();
         }

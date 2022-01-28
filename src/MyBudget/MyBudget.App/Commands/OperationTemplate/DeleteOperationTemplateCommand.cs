@@ -7,5 +7,6 @@ namespace MyBudget.App.Commands.OperationTemplate
     {
         public Guid Id { get; set; }
         public Guid BudgetTemplateId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

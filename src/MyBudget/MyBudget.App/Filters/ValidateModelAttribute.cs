@@ -59,6 +59,8 @@ namespace MyBudget.App.Filters
                     return "Nie można zmienić nazwy operacji jeżeli pochodzi ze schematu!";
                 case DomainError.InvalidDate:
                     return "Niepoprawna data!";
+                case DomainError.ObjectDoesNotExistsOrYouDoNotHaveEnoughPermissions:
+                    return "Obiekt nie istnieje, albo nie masz wystarczających uprawnień!";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(domainError), domainError, null);
             }

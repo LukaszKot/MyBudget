@@ -29,9 +29,10 @@ namespace MyBudget.App.Repositories
                 .ToListAsync();
         }
 
-        public async Task<OperationTemplate> GetAsync(Guid id)
+        public async Task<OperationTemplate?> GetAsync(Guid id, Guid userId)
         {
-            return await _dbContext.OperationTemplates.SingleOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.OperationTemplates
+                .SingleOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
         public async Task Create(OperationTemplate operationTemplate)

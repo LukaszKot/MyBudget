@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using MyBudget.App.Commands.Operation;
 using MyBudget.App.Domain;
+using MyBudget.App.Exceptions;
 using MyBudget.App.Repositories;
 
 namespace MyBudget.App.Services
@@ -41,7 +42,11 @@ namespace MyBudget.App.Services
 
         public async Task CreateOperationFromTemplateAsync(CreateOperationFromTemplateCommand command)
         {
-            var operationTemplate = await _operationTemplateRepository.GetAsync(command.OperationTemplateId);
+            var operationTemplate = await _operationTemplateRepository.GetAsync(command.OperationTemplateId, command.UserId!.Value);
+            if (operationTemplate is null)
+            {
+                throw new DomainException(DomainError.InvalidCredentials);
+            }
             var operation = new Operation(command.BudgetId, operationTemplate);
             await _operationRepository.Add(operation);
         }

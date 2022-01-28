@@ -6,5 +6,8 @@ namespace MyBudget.App.Commands.Operation
 {
     public record CreateOperationFromTemplateCommand(
         [Required] Guid BudgetId,
-        [Required] Guid OperationTemplateId);
+        [Required] Guid OperationTemplateId)
+    {
+        public Guid? UserId { get; set; }
+    }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MyBudget.App.Commands.OperationTemplate;
 using MyBudget.App.Domain;
 using MyBudget.App.DTO.Budget;
+using MyBudget.App.Exceptions;
 using MyBudget.App.Queries.OperationTemplates;
 using MyBudget.App.Repositories;
 
@@ -26,7 +27,11 @@ namespace MyBudget.App.Services
 
         public async Task UpdateOperationTemplateAsync(UpdateOperationTemplateCommand command)
         {
-            var operationTemplate = await _operationTemplateRepository.GetAsync(command.Id);
+            var operationTemplate = await _operationTemplateRepository.GetAsync(command.Id, command.UserId!.Value);
+            if (operationTemplate is null)
+            {
+                throw new DomainException(DomainError.ObjectDoesNotExistsOrYouDoNotHaveEnoughPermissions);
+            }
             operationTemplate.SetName(command.Name);
             operationTemplate.SetValue(command.DefaultValue, command.ValueType);
             operationTemplate.OperationCategoryId = command.OperationCategoryId;
@@ -35,7 +40,7 @@ namespace MyBudget.App.Services
 
         public async Task DeleteOperationTemplateAsync(DeleteOperationTemplateCommand command)
         {
-            var operationTemplate = await _operationTemplateRepository.GetAsync(command.Id);
+            var operationTemplate = await _operationTemplateRepository.GetAsync(command.Id, command.UserId!.Value);
             await _operationTemplateRepository.Delete(operationTemplate);
         }
 

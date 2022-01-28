@@ -12,5 +12,6 @@ namespace MyBudget.App.Commands.OperationTemplate
         public ValueType? ValueType { get; set; }
         public Guid? BudgetTemplateId { get; set; }
         public Guid? OperationCategoryId { get; set; }
+        public Guid? UserId { get; set; }
     }
 }
